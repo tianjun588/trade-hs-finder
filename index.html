@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlobalTrade HS & Tariff Navigator | 全球HS编码与关税反查工具</title>
+  <meta name="description" content="Free global HS code finder and customs import duty calculator. Supports USA Section 301 tariffs, EU, and UK import rates.">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <!-- Toast 提示 -->
+  <div id="toast" class="fixed top-5 right-5 z-50 transform transition-all duration-300 opacity-0 pointer-events-none translate-y-[-10px] bg-slate-900 text-white px-4 py-2.5 rounded-lg shadow-xl text-sm flex items-center space-x-2">
+    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+    <span id="toast-msg">已复制到剪贴板</span>
+  </div>
+
+  <!-- 顶部导航 -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div>
+          <span class="font-bold text-lg text-slate-900 tracking-tight flex items-center gap-1.5">
+            GlobalTrade <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold uppercase">HS & Tariff</span>
+          </span>
+          <p class="text-xs text-slate-500 hidden sm:block">外贸HS编码与欧美进口关税智能反查库</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button id="btn-open-deploy-guide" class="text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-300 bg-white transition-colors flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          部署说明
+        </button>
+        <button id="btn-top-wechat" class="text-xs sm:text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8.5 3C4.9 3 2 5.5 2 8.6c0 1.8 1 3.4 2.6 4.4L4 16l3.3-1.6c.4.1.8.2 1.2.2.3 0 .6 0 .9-.1-.2-.5-.3-1.1-.3-1.7 0-3.3 3.1-6 7-6 .4 0 .8 0 1.2.1C16.1 4.7 12.6 3 8.5 3zm-2 4.4c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm4 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm5.5 4.4c-3.3 0-6 2.2-6 5s2.7 5 6 5c.4 0 .7 0 1.1-.1L20 23l-.7-2.4c1.6-.9 2.7-2.4 2.7-3.8 0-2.8-2.7-5-6-5zm-2 3.6c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8zm4 0c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8z"/></svg>
+          微信咨询
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    
+    <!-- 顶部广告位预留（Google AdSense 规范位） -->
+    <div class="w-full bg-slate-100/80 border border-dashed border-slate-300 rounded-xl p-3 text-center">
+      <div class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-1">Sponsored · 广告位预留 (Google AdSense)</div>
+      <div class="h-14 sm:h-16 flex items-center justify-center text-xs text-slate-400 bg-white/60 rounded border border-slate-200">
+        网站有稳定访客后，在此处粘贴 Google AdSense 广告单元代码
+      </div>
+    </div>
+
+    <!-- 搜索区域 -->
+    <div class="bg-gradient-to-br from-white to-blue-50/40 p-6 sm:p-8 rounded-2xl border border-blue-100 shadow-sm relative overflow-hidden">
+      <div class="max-w-3xl mx-auto text-center space-y-3">
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          全球 HS 编码与多国进口关税反查
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600">
+          支持输入 6 位编码、中文商品名或英文关键词。即刻查询美国基础税率、301 关税、欧盟及英国关税。
+        </p>
+
+        <!-- 搜索输入框 -->
+        <div class="relative mt-4">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="搜索 HS 编码 (如 8471.30)、中文品名 (如 笔记本/家具/T恤) 或英文 (Laptops)..." 
+            class="w-full pl-11 pr-24 py-3.5 sm:py-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm sm:text-base placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all"
+          >
+          <div class="absolute inset-y-0 right-1.5 flex items-center">
+            <button id="clear-search-btn" class="hidden text-xs text-slate-400 hover:text-slate-600 px-2 py-1 mr-1">清空</button>
+            <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1.5 rounded-lg border border-slate-200 hidden sm:inline-block font-mono">秒级筛选</span>
+          </div>
+        </div>
+
+        <!-- 筛选分类标签 -->
+        <div class="flex flex-wrap items-center justify-center gap-2 pt-2" id="category-pills">
+          <button class="cat-pill active text-xs font-medium px-3 py-1.5 rounded-full bg-blue-600 text-white transition-colors" data-category="ALL">全部品类</button>
+          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="电子与信息技术">电子/IT设备</button>
+          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="家具与家居用品">家具/家居</button>
+          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="纺织品与服装">纺织/服装</button>
+          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="机械与汽配">机械/汽配/原料</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 匹配数量提示 -->
+    <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+      <div>共匹配到 <span id="match-count" class="font-bold text-blue-600">0</span> 项海关编码记录</div>
+      <div class="flex items-center space-x-3">
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>实时海关规则库</span>
+        <span class="text-slate-300">|</span>
+        <span>货币单位：美元 (USD)</span>
+      </div>
+    </div>
+
+    <!-- 结果卡片容器 -->
+    <div id="results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- 由 JS 动态渲染 -->
+    </div>
+
+    <!-- 空结果状态 -->
+    <div id="empty-state" class="hidden text-center py-12 bg-white rounded-2xl border border-slate-200">
+      <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <h3 class="text-base font-semibold text-slate-800">未找到匹配的海关编码</h3>
+      <p class="text-xs text-slate-500 mt-1">请尝试搜索更通用的品名词，或点击右下角微信直接咨询人工归类。</p>
+    </div>
+
+    <!-- 中部广告位预留 -->
+    <div class="w-full bg-slate-100/80 border border-dashed border-slate-300 rounded-xl p-3 text-center my-6">
+      <div class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-1">Sponsored · 页面广告位预留 (Google AdSense)</div>
+      <div class="h-16 flex items-center justify-center text-xs text-slate-400 bg-white/60 rounded border border-slate-200">
+        Google 广告自动匹配展示（欧美采购商常看货代物流、外贸软件广告）
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 space-y-2">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-slate-700">GlobalTrade HS Navigator</span>
+        <span>·</span>
+        <span>GitHub Pages 极速托管</span>
+      </div>
+      <div>
+        关税数据参考 WCO 协调制度与各口岸海关公报 · 最终报关请以目的港清关行实审为准
+      </div>
+    </div>
+  </footer>
+
+  <!-- 右下角悬浮微信按钮 -->
+  <aside class="fixed bottom-6 right-6 z-40">
+    <button id="floating-wechat-btn" class="group flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 focus:outline-none">
+      <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M8.5 3C4.9 3 2 5.5 2 8.6c0 1.8 1 3.4 2.6 4.4L4 16l3.3-1.6c.4.1.8.2 1.2.2.3 0 .6 0 .9-.1-.2-.5-.3-1.1-.3-1.7 0-3.3 3.1-6 7-6 .4 0 .8 0 1.2.1C16.1 4.7 12.6 3 8.5 3zm-2 4.4c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm4 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm5.5 4.4c-3.3 0-6 2.2-6 5s2.7 5 6 5c.4 0 .7 0 1.1-.1L20 23l-.7-2.4c1.6-.9 2.7-2.4 2.7-3.8 0-2.8-2.7-5-6-5zm-2 3.6c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8zm4 0c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8z"/></svg>
+      <span class="text-xs font-semibold">外贸同行交流 / 深度咨询</span>
+    </button>
+  </aside>
+
+  <!-- 弹窗 1：税费试算器 -->
+  <div id="calculator-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <span id="modal-hs" class="text-xs font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">8471.30</span>
+          <h3 id="modal-title" class="text-base font-bold text-slate-900 mt-1">便携式电脑 / 笔记本电脑</h3>
+        </div>
+        <button id="close-modal-btn" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <label class="block text-xs font-semibold text-slate-700">预估申报货值 (FOB/CIF USD $)</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-sm">$</span>
+          <input type="number" id="calc-invoice-val" value="10000" class="w-full pl-7 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2 text-xs">
+        <div class="font-bold text-slate-800 border-b border-slate-200 pb-1 mb-2">多国清关预计关税试算</div>
+        
+        <div class="flex items-center justify-between">
+          <span class="text-slate-600">美国 (基准 + 301 综合税率 <span id="modal-us-rate" class="font-bold text-rose-600">35.0%</span>):</span>
+          <span id="modal-us-val" class="font-mono font-bold text-rose-600 text-sm">$3,500.00</span>
+        </div>
+        <div class="text-[11px] text-slate-400 pl-2">包含基础税率 <span id="modal-us-base">0%</span> 与 301 附加关税</div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+          <span class="text-slate-600">欧盟进口关税 (税率 <span id="modal-eu-rate" class="font-bold text-blue-600">0.0%</span>):</span>
+          <span id="modal-eu-val" class="font-mono font-bold text-blue-600 text-sm">$0.00</span>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+          <span class="text-slate-600">英国进口关税 (税率 <span id="modal-uk-rate" class="font-bold text-slate-700">0.0%</span>):</span>
+          <span id="modal-uk-val" class="font-mono font-bold text-slate-800 text-sm">$0.00</span>
+        </div>
+      </div>
+
+      <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 text-xs leading-relaxed" id="modal-tips">
+        提示：该品类出运美国受 301 清单严格核验，建议提前让清关代理确认品名与具体规格申报要素。
+      </div>
+
+      <div class="flex items-center justify-end space-x-2 pt-2">
+        <button id="btn-copy-declaration" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-sm transition-colors flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+          一键复制报关要素
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 弹窗 2：微信咨询 -->
+  <div id="wechat-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center relative space-y-4">
+      <button id="close-wechat-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.5 3C4.9 3 2 5.5 2 8.6c0 1.8 1 3.4 2.6 4.4L4 16l3.3-1.6c.4.1.8.2 1.2.2.3 0 .6 0 .9-.1-.2-.5-.3-1.1-.3-1.7 0-3.3 3.1-6 7-6 .4 0 .8 0 1.2.1C16.1 4.7 12.6 3 8.5 3zm-2 4.4c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm4 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm5.5 4.4c-3.3 0-6 2.2-6 5s2.7 5 6 5c.4 0 .7 0 1.1-.1L20 23l-.7-2.4c1.6-.9 2.7-2.4 2.7-3.8 0-2.8-2.7-5-6-5zm-2 3.6c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8zm4 0c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8z"/></svg>
+      </div>
+
+      <div class="space-y-1">
+        <h3 class="text-base font-bold text-slate-900">外贸同行交流 & 关税咨询</h3>
+        <p class="text-xs text-slate-500">疑难海关编码归类 · 目的港关税筹划 · 报关避坑</p>
+      </div>
+
+      <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl mx-auto w-48 h-48 flex flex-col items-center justify-center relative shadow-inner">
+        <svg class="w-36 h-36 text-slate-800" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M0 0h30v30H0V0zm6 6v18h18V6H6zm4 4h10v10H10V10zM70 0h30v30H70V0zm6 6v18h18V6H76zm4 4h10v10H80V10zM0 70h30v30H0V70zm6 6v18h18V76H6zm4 4h10v10H10V80zm40-70h10v10H50V10zm10 10h10v10H60V20zm-20 0h10v10H40V20zm0 20h10v10H40V40zm20 0h10v10H60V40zm-10 10h10v10H50V50zm-10 20h10v10H40V70zm20 0h10v10H60V70zm10 10h10v10H70V80zm10-10h10v10H80V70zm0 20h10v10H80V90zm10-30h10v10H90V60z"/>
+        </svg>
+        <span class="text-[10px] text-slate-400 mt-2 font-mono">微信号：外贸交流</span>
+      </div>
+
+      <p class="text-[11px] text-slate-500">
+        添加时请备注：<strong class="text-slate-800">外贸关税</strong> 即可快速通过
+      </p>
+    </div>
+  </div>
+
+  <!-- 弹窗 3：部署指引 -->
+  <div id="guide-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 relative space-y-4 max-h-[85vh] overflow-y-auto">
+      <button id="close-guide-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <div class="flex items-center space-x-2 border-b border-slate-100 pb-3">
+        <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">Git</div>
+        <h3 class="text-base font-bold text-slate-900">GitHub Pages 零成本上线与谷歌收录三步法</h3>
+      </div>
+
+      <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
+        <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl space-y-1">
+          <div class="font-bold text-blue-900">1. 创建 GitHub 仓库并上传代码</div>
+          <p>在 GitHub.com 新建公开仓库，直接将本代码保存为 <code>index.html</code> 上传至仓库根目录。</p>
+        </div>
+
+        <div class="p-3 bg-emerald-50 border border-emerald-100 rounded-xl space-y-1">
+          <div class="font-bold text-emerald-900">2. 开启 GitHub Pages 免费公网访问</div>
+          <p>进入仓库 <strong>Settings</strong> -> 左侧 <strong>Pages</strong> -> Build and deployment 选择 <strong>Deploy from a branch (main / root)</strong>，点击 Save 即可获得全球公网链接。</p>
+        </div>
+
+        <div class="p-3 bg-amber-50 border border-amber-100 rounded-xl space-y-1">
+          <div class="font-bold text-amber-900">3. 提交 Google Search Console 让谷歌自动抓取</div>
+          <p>打开 Google Search Console 添加你的网址，Google 爬虫会依据页面包含的精准 HS 编码关键词自动收录排名。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心数据与业务逻辑 -->
+  <script>
+    const HS_DATABASE = [
+      {
+        code: "8471.30",
+        name_cn: "便携式自动数据处理设备 (笔记本电脑/平板电脑 ≤10kg)",
+        name_en: "Laptops & Portable Automatic Data Processing Machines",
+        category: "电子与信息技术",
+        us_base: "Free (0.0%)",
+        us_sec301: "35.0%",
+        us_total: "35.0%",
+        us_val_rate: 0.35,
+        eu_rate: "0.0%",
+        eu_val_rate: 0.0,
+        uk_rate: "0.0%",
+        uk_val_rate: 0.0,
+        tips: "欧美通常给予IT信息技术协定(ITA)基准零关税，但出口美国受301附加税率严格管制，建议核查最新关税豁免清单。"
+      },
+      {
+        code: "8517.13",
+        name_cn: "智能手机 (蜂窝网络智能电话机)",
+        name_en: "Smartphones for Cellular Networks",
+        category: "电子与信息技术",
+        us_base: "Free (0.0%)",
+        us_sec301: "35.0%",
+        us_total: "35.0%",
+        us_val_rate: 0.35,
+        eu_rate: "0.0%",
+        eu_val_rate: 0.0,
+        uk_rate: "0.0%",
+        uk_val_rate: 0.0,
+        tips: "无线通讯类产品进欧美需具备 FCC / CE-RED 认证，关税层面受 301 附税影响较大。"
+      },
+      {
+        code: "8504.40",
+        name_cn: "静止式变流器 (开关电源/电源适配器/逆变器)",
+        name_en: "Static Converters (Power Adapters, Inverters)",
+        category: "电子与信息技术",
+        us_base: "Free (0.0%)",
+        us_sec301: "35.0%",
+        us_total: "35.0%",
+        us_val_rate: 0.35,
+        eu_rate: "0.0% - 2.1%",
+        eu_val_rate: 0.021,
+        uk_rate: "2.0%",
+        uk_val_rate: 0.02,
+        tips: "电源适配器属于高频通关品类，出运欧美需附带 UL / CE 认证报告及完整能效标准铭牌。"
+      },
+      {
+        code: "8544.42",
+        name_cn: "装有接插件的电导体 (USB数据线/连接线缆 ≤1000V)",
+        name_en: "Insulated Electric Cables Fitted with Connectors",
+        category: "电子与信息技术",
+        us_base: "2.6%",
+        us_sec301: "32.4%",
+        us_total: "35.0%",
+        us_val_rate: 0.35,
+        eu_rate: "3.3%",
+        eu_val_rate: 0.033,
+        uk_rate: "3.0%",
+        uk_val_rate: 0.03,
+        tips: "基准关税非零，合并301税率后综合清关税费较高，需精准核算到岸成本。"
+      },
+      {
+        code: "8534.00",
+        name_cn: "印制电路板 (单面/双面/多层硬质与柔性PCB板)",
+        name_en: "Printed Circuits (PCBs)",
+        category: "电子与信息技术",
+        us_base: "Free (0.0%)",
+        us_sec301: "25.0%",
+        us_total: "25.0%",
+        us_val_rate: 0.25,
+        eu_rate: "0.0%",
+        eu_val_rate: 0.0,
+        uk_rate: "0.0%",
+        uk_val_rate: 0.0,
+        tips: "电子制造核心元器件，大部分贸易国基准关税均为零，申报需注明层数及基材。"
+      },
+      {
+        code: "8507.60",
+        name_cn: "锂离子蓄电池 (储能电池/动力电池组/数码电芯)",
+        name_en: "Lithium-ion Batteries and Packs",
+        category: "电子与信息技术",
+        us_base: "3.4%",
+        us_sec301: "25.0%",
+        us_total: "28.4%",
+        us_val_rate: 0.284,
+        eu_rate: "2.7%",
+        eu_val_rate: 0.027,
+        uk_rate: "2.5%",
+        uk_val_rate: 0.025,
+        tips: "海关严格按危险品第9类监管，出运必须备齐 UN38.3 报告、MSDS 及危险品包装使用鉴定证书。"
+      },
+      {
+        code: "9403.60",
+        name_cn: "其他木质家具 (木餐桌/书柜/木制储物柜/边柜)",
+        name_en: "Other Wooden Furniture (Dining Tables, Cabinets)",
+        category: "家具与家居用品",
+        us_base: "Free - 2.5%",
+        us_sec301: "25.0%",
+        us_total: "25.0% - 27.5%",
+        us_val_rate: 0.25,
+        eu_rate: "2.7%",
+        eu_val_rate: 0.027,
+        uk_rate: "2.0%",
+        uk_val_rate: 0.02,
+        tips: "美国海关对木制卧房家具有极高的反倾销/反补贴(AD/CVD)税率，申报前必须明确材质与具体用途分类。"
+      },
+      {
+        code: "9401.61",
+        name_cn: "带软垫的木框架坐具 (软体木沙发/实木软包扶手椅)",
+        name_en: "Upholstered Seats with Wooden Frames (Sofas, Armchairs)",
+        category: "家具与家居用品",
+        us_base: "Free (0.0%)",
+        us_sec301: "25.0%",
+        us_total: "25.0%",
+        us_val_rate: 0.25,
+        eu_rate: "2.7%",
+        eu_val_rate: 0.027,
+        uk_rate: "2.0%",
+        uk_val_rate: 0.02,
+        tips: "大件家具海运大多按整柜走，装柜时需提前算准 CBM，防止体积超标产生爆仓亏舱费。"
+      },
+      {
+        code: "9403.20",
+        name_cn: "其他金属家具 (铁艺置物架/钢制工位桌/金属床架)",
+        name_en: "Other Metal Furniture (Steel Desks, Racks)",
+        category: "家具与家居用品",
+        us_base: "Free (0.0%)",
+        us_sec301: "25.0%",
+        us_total: "25.0%",
+        us_val_rate: 0.25,
+        eu_rate: "2.7%",
+        eu_val_rate: 0.027,
+        uk_rate: "2.0%",
+        uk_val_rate: 0.02,
+        tips: "欧美市场对金属家具基准税率友好，重点核验纸箱抗压跌落标准与防锈涂层环保标准。"
+      },
+      {
+        code: "6109.10",
+        name_cn: "棉制针织或钩编 T恤衫、汗衫及类似背心",
+        name_en: "T-shirts, Singlets and Other Vests of Cotton (Knitted)",
+        category: "纺织品与服装",
+        us_base: "16.5%",
+        us_sec301: "7.5%",
+        us_total: "24.0%",
+        us_val_rate: 0.24,
+        eu_rate: "12.0%",
+        eu_val_rate: 0.12,
+        uk_rate: "12.0%",
+        uk_val_rate: 0.12,
+        tips: "服装纺织品属于欧美贸易保护重点行业，基准税率较高。申报必须标清棉纤维含量百分比与男女款。"
+      },
+      {
+        code: "6110.20",
+        name_cn: "棉制套头衫、开襟衫、背心及类似品 (棉毛衫/卫衣)",
+        name_en: "Sweaters, Pullovers and Vests of Cotton",
+        category: "纺织品与服装",
+        us_base: "16.5%",
+        us_sec301: "7.5%",
+        us_total: "24.0%",
+        us_val_rate: 0.24,
+        eu_rate: "12.0%",
+        eu_val_rate: 0.12,
+        uk_rate: "12.0%",
+        uk_val_rate: 0.12,
+        tips: "需明确针织还是梭织，欧美对织物水洗标、成分标与原产地标有严格强制标识法规。"
+      },
+      {
+        code: "6203.42",
+        name_cn: "棉制男式长裤及马裤 (牛仔裤/休闲长裤)",
+        name_en: "Men's Cotton Trousers, Bib and Brace Overalls, Jeans",
+        category: "纺织品与服装",
+        us_base: "16.6%",
+        us_sec301: "7.5%",
+        us_total: "24.1%",
+        us_val_rate: 0.241,
+        eu_rate: "12.0%",
+        eu_val_rate: 0.12,
+        uk_rate: "12.0%",
+        uk_val_rate: 0.12,
+        tips: "梭织类重工水洗牛仔裤，申报时需注明是否经过破洞打磨、石磨及是否含弹性纤维。"
+      },
+      {
+        code: "8708.29",
+        name_cn: "车身其他未列名零部件 (汽车车门/车顶/保险杠配件)",
+        name_en: "Other Parts and Accessories of Motor Vehicle Bodies",
+        category: "机械与汽配",
+        us_base: "2.5%",
+        us_sec301: "25.0%",
+        us_total: "27.5%",
+        us_val_rate: 0.275,
+        eu_rate: "3.5% - 4.5%",
+        eu_val_rate: 0.045,
+        uk_rate: "4.0%",
+        uk_val_rate: 0.04,
+        tips: "汽配类产品进入欧美供应链，通常需要客户提供适用车型、原厂件号(OEM Part No.)及质量体系认定。"
+      },
+      {
+        code: "8418.10",
+        name_cn: "装有独立外门的冷藏-冷冻组合机 (家用双门及多门冰箱)",
+        name_en: "Combined Refrigerator-Freezers with Separate Doors",
+        category: "机械与汽配",
+        us_base: "Free (0.0%)",
+        us_sec301: "25.0%",
+        us_total: "25.0%",
+        us_val_rate: 0.25,
+        eu_rate: "1.9% - 2.2%",
+        eu_val_rate: 0.022,
+        uk_rate: "2.0%",
+        uk_val_rate: 0.02,
+        tips: "含氟制冷剂面临严格环保法规(如欧盟 F-Gas 配额与美国 EPA 认证)，出口报关需严格列明制冷工质型号。"
+      }
+    ];
+
+    let currentCategory = 'ALL';
+    let currentSearch = '';
+    let selectedItem = HS_DATABASE[0];
+
+    const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
+    const resultsContainer = document.getElementById('results-container');
+    const matchCount = document.getElementById('match-count');
+    const emptyState = document.getElementById('empty-state');
+    const categoryPills = document.querySelectorAll('.cat-pill');
+
+    const calcModal = document.getElementById('calculator-modal');
+    const wechatModal = document.getElementById('wechat-modal');
+    const guideModal = document.getElementById('guide-modal');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+
+    function showToast(text) {
+      toastMsg.textContent = text;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    }
+
+    function copyText(text, successMsg) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMsg || '已复制到剪贴板');
+        }).catch(() => {
+          fallbackCopy(text, successMsg);
+        });
+      } else {
+        fallbackCopy(text, successMsg);
+      }
+    }
+
+    function fallbackCopy(text, successMsg) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg || '已复制到剪贴板');
+      } catch (err) {
+        showToast('复制失败，请手动选择复制');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function renderItems() {
+      const query = currentSearch.trim().toLowerCase();
+      
+      const filtered = HS_DATABASE.filter(item => {
+        const matchesCat = (currentCategory === 'ALL' || item.category === currentCategory);
+        const matchesQuery = !query || 
+          item.code.toLowerCase().includes(query) ||
+          item.name_cn.toLowerCase().includes(query) ||
+          item.name_en.toLowerCase().includes(query) ||
+          item.category.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+      });
+
+      matchCount.textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        resultsContainer.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      
+      resultsContainer.innerHTML = filtered.map((item) => `
+        <div class="bg-white rounded-xl border border-slate-200 hover:border-blue-400 p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                HS ${item.code}
+              </span>
+              <span class="text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-500 font-medium">
+                ${item.category}
+              </span>
+            </div>
+
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                ${item.name_cn}
+              </h3>
+              <p class="text-xs text-slate-500 font-sans line-clamp-1 mt-0.5" title="${item.name_en}">
+                ${item.name_en}
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-100 space-y-1.5 text-xs">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">美国进口综合税率:</span>
+                <span class="font-bold text-rose-600 font-mono">${item.us_total}</span>
+              </div>
+              <div class="flex justify-between items-center text-[11px] text-slate-400">
+                <span>(基准税率: ${item.us_base} | 301条款附税)</span>
+              </div>
+              <div class="flex justify-between items-center pt-1 border-t border-slate-200">
+                <span class="text-slate-500">欧盟基准关税:</span>
+                <span class="font-semibold text-blue-600 font-mono">${item.eu_rate}</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">英国基准关税:</span>
+                <span class="font-semibold text-slate-700 font-mono">${item.uk_rate}</span>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-slate-500 leading-relaxed line-clamp-2">
+              <strong class="text-slate-600">合规提示:</strong> ${item.tips}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <button class="btn-open-calc flex-1 py-1.5 px-3 bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white rounded-lg text-xs font-semibold transition-all text-center flex items-center justify-center gap-1" data-code="${item.code}">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+              税金试算
+            </button>
+            <button class="btn-copy-card py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition-colors" data-code="${item.code}" title="复制报关编码与品名">
+              复制
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.btn-open-calc').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const code = e.currentTarget.getAttribute('data-code');
+          openCalculator(code);
+        });
+      });
+
+      document.querySelectorAll('.btn-copy-card').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const code = e.currentTarget.getAttribute('data-code');
+          const found = HS_DATABASE.find(x => x.code === code);
+          if (found) {
+            const copyContent = `HS Code: ${found.code}\n品名(中文): ${found.name_cn}\nDescription(EN): ${found.name_en}\n美国综合关税: ${found.us_total} | 欧盟关税: ${found.eu_rate}`;
+            copyText(copyContent, `已复制 HS ${found.code} 报关信息`);
+          }
+        });
+      });
+    }
+
+    function openCalculator(code) {
+      const item = HS_DATABASE.find(x => x.code === code);
+      if (!item) return;
+      selectedItem = item;
+
+      document.getElementById('modal-hs').textContent = item.code;
+      document.getElementById('modal-title').textContent = item.name_cn;
+      document.getElementById('modal-us-rate').textContent = item.us_total;
+      document.getElementById('modal-us-base').textContent = item.us_base;
+      document.getElementById('modal-eu-rate').textContent = item.eu_rate;
+      document.getElementById('modal-uk-rate').textContent = item.uk_rate;
+      document.getElementById('modal-tips').textContent = `出运合规提醒：${item.tips}`;
+
+      recalcDuty();
+
+      calcModal.classList.remove('opacity-0', 'pointer-events-none');
+      calcModal.classList.add('opacity-100');
+    }
+
+    function recalcDuty() {
+      const invoiceVal = parseFloat(document.getElementById('calc-invoice-val').value) || 0;
+      const usVal = invoiceVal * selectedItem.us_val_rate;
+      const euVal = invoiceVal * selectedItem.eu_val_rate;
+      const ukVal = invoiceVal * selectedItem.uk_val_rate;
+
+      document.getElementById('modal-us-val').textContent = `$${usVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('modal-eu-val').textContent = `$${euVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('modal-uk-val').textContent = `$${ukVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function setupEvents() {
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        if (currentSearch.trim().length > 0) {
+          clearSearchBtn.classList.remove('hidden');
+        } else {
+          clearSearchBtn.classList.add('hidden');
+        }
+        renderItems();
+      });
+
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        currentSearch = '';
+        clearSearchBtn.classList.add('hidden');
+        renderItems();
+        searchInput.focus();
+      });
+
+      categoryPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          categoryPills.forEach(p => {
+            p.classList.remove('bg-blue-600', 'text-white');
+            p.classList.add('bg-white', 'text-slate-600');
+          });
+          pill.classList.remove('bg-white', 'text-slate-600');
+          pill.classList.add('bg-blue-600', 'text-white');
+
+          currentCategory = pill.getAttribute('data-category');
+          renderItems();
+        });
+      });
+
+      document.getElementById('calc-invoice-val').addEventListener('input', recalcDuty);
+
+      document.getElementById('close-modal-btn').addEventListener('click', () => {
+        calcModal.classList.add('opacity-0', 'pointer-events-none');
+        calcModal.classList.remove('opacity-100');
+      });
+
+      document.getElementById('btn-copy-declaration').addEventListener('click', () => {
+        const invoiceVal = parseFloat(document.getElementById('calc-invoice-val').value) || 0;
+        const usVal = invoiceVal * selectedItem.us_val_rate;
+        const text = `【出口报关与清关税费预估单】\n海关编码(HS Code): ${selectedItem.code}\n商品名称: ${selectedItem.name_cn}\nEnglish Name: ${selectedItem.name_en}\n申报货值: $${invoiceVal.toLocaleString()} USD\n目的港关税核算:\n - 美国预计税金: $${usVal.toLocaleString()} (${selectedItem.us_total})\n - 欧盟预计税金: $${(invoiceVal * selectedItem.eu_val_rate).toLocaleString()} (${selectedItem.eu_rate})\n监管提示: ${selectedItem.tips}\n(本数据由 GlobalTrade HS Navigator 自动生成)`;
+        copyText(text, '已复制完整关税预估申报单！');
+      });
+
+      const openWeChat = () => {
+        wechatModal.classList.remove('opacity-0', 'pointer-events-none');
+        wechatModal.classList.add('opacity-100');
+      };
+
+      const closeWeChat = () => {
+        wechatModal.classList.add('opacity-0', 'pointer-events-none');
+        wechatModal.classList.remove('opacity-100');
+      };
+
+      document.getElementById('btn-top-wechat').addEventListener('click', openWeChat);
+      document.getElementById('floating-wechat-btn').addEventListener('click', openWeChat);
+      document.getElementById('close-wechat-btn').addEventListener('click', closeWeChat);
+
+      const openGuide = () => {
+        guideModal.classList.remove('opacity-0', 'pointer-events-none');
+        guideModal.classList.add('opacity-100');
+      };
+
+      const closeGuide = () => {
+        guideModal.classList.add('opacity-0', 'pointer-events-none');
+        guideModal.classList.remove('opacity-100');
+      };
+
+      document.getElementById('btn-open-deploy-guide').addEventListener('click', openGuide);
+      document.getElementById('close-guide-btn').addEventListener('click', closeGuide);
+
+      [calcModal, wechatModal, guideModal].forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+          }
+        });
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderItems();
+      setupEvents();
+    });
+  </script>
+</body>
+</html>
