@@ -3,8 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalTrade HS & Tariff Navigator | 全球HS编码与关税反查工具</title>
-  <meta name="description" content="Free global HS code finder and customs import duty calculator. Supports USA Section 301 tariffs, EU, and UK import rates.">
+  <title>GlobalTrade HS & Tariff Navigator | 全球85+外贸爆品HS编码与欧美进口关税秒查工具 (2026最新)</title>
+  <meta name="description" content="免费秒查全球85+外贸出海核心品类HS海关编码、美国MFN基准税率、301附加关税、欧盟TARIC关税及英国进口税率。涵盖电子数码、新能源光伏储能、机械微挖、汽摩配件、家具家电、服装鞋包、医疗器械及跨境爆品，支持一键税金试算与中英双语切换。">
+  <meta name="keywords" content="HS编码查询,美国关税查询,301关税清单,欧盟关税查询,HS Code Lookup,US Import Duty Calculator,Section 301 Tariff,跨境电商选品,外贸报关要素,零关税产品">
+  <link rel="canonical" href="https://tianjun588.github.io/trade-hs-finder/">
+  <meta property="og:title" content="GlobalTrade HS & Tariff Navigator | 全球外贸HS编码与欧美关税速查引擎">
+  <meta property="og:description" content="免注册0秒即查85+外贸出海热门品类美国301综合关税、欧盟与英国进口税率，内置0%免税黄金品类筛选与FOB/CIF税金试算器。">
+  <meta property="og:url" content="https://tianjun588.github.io/trade-hs-finder/">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "GlobalTrade HS Code & Customs Tariff Navigator | 全球HS编码与欧美进口关税智能反查系统",
+      "url": "https://tianjun588.github.io/trade-hs-finder/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "description": "Free instant HS code lookup and customs import duty calculator for 85+ global export categories. Check USA MFN + Section 301 tariffs, EU TARIC duty, and UKGT rates.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How to calculate US import duty and Section 301 tariff by HS code? 如何通过HS编码计算美国进口关税与301附加税？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the 6-digit HS code or product name in GlobalTrade HS Navigator to instantly view the US MFN base duty rate, Section 301 additional tariff (7.5%, 25%, or 50%), and total landed customs duty."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which export products enjoy 0% import tariff in the US and EU? 哪些外贸出海产品在欧美享受0%零关税？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Products such as digital hearing aids (HS 9021.40), electric wheelchairs (HS 8713.90), Christmas festive decorations (HS 9505.10), and human hair wigs enjoy 0% base duty and Section 301 exemptions in the US, while solar panels (HS 8541.43) and IT electronics (HS 8471.30) enjoy 0% duty in the European Union."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     tailwind.config = {
@@ -27,19 +74,19 @@
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
 
-  <!-- Toast 提示 -->
+  <!-- Toast Notification -->
   <div id="toast" class="fixed top-5 right-5 z-50 transform transition-all duration-300 opacity-0 pointer-events-none translate-y-[-10px] bg-slate-900 text-white px-4 py-2.5 rounded-lg shadow-xl text-sm flex items-center space-x-2">
     <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
     <span id="toast-msg">已复制到剪贴板</span>
   </div>
 
-  <!-- 顶部导航 -->
+  <!-- Top Navigation Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
@@ -47,16 +94,19 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
         <div>
-          <span class="font-bold text-lg text-slate-900 tracking-tight flex items-center gap-1.5">
-            GlobalTrade <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold uppercase">HS & Tariff</span>
+          <span class="font-bold text-base sm:text-lg text-slate-900 tracking-tight flex items-center gap-1.5">
+            GlobalTrade <span class="text-[11px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold uppercase">HS & Tariff Pro</span>
           </span>
-          <p class="text-xs text-slate-500 hidden sm:block">外贸HS编码与欧美进口关税智能反查库</p>
+          <p class="text-xs text-slate-500 hidden sm:block">全球外贸HS编码与美欧英进口关税实时反查引擎</p>
         </div>
       </div>
-      <div class="flex items-center space-x-2">
-        <button id="btn-open-deploy-guide" class="text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-300 bg-white transition-colors flex items-center gap-1">
+      <div class="flex items-center space-x-1.5 sm:space-x-2">
+        <button id="btn-lang-toggle" class="text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 px-2.5 py-1.5 rounded-lg border border-blue-200 transition-colors">
+          EN / 中文
+        </button>
+        <button id="btn-open-deploy-guide" class="text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-blue-300 bg-white transition-colors flex items-center gap-1">
           <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          部署说明
+          GitHub一键部署说明
         </button>
         <button id="btn-top-wechat" class="text-xs sm:text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8.5 3C4.9 3 2 5.5 2 8.6c0 1.8 1 3.4 2.6 4.4L4 16l3.3-1.6c.4.1.8.2 1.2.2.3 0 .6 0 .9-.1-.2-.5-.3-1.1-.3-1.7 0-3.3 3.1-6 7-6 .4 0 .8 0 1.2.1C16.1 4.7 12.6 3 8.5 3zm-2 4.4c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm4 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm5.5 4.4c-3.3 0-6 2.2-6 5s2.7 5 6 5c.4 0 .7 0 1.1-.1L20 23l-.7-2.4c1.6-.9 2.7-2.4 2.7-3.8 0-2.8-2.7-5-6-5zm-2 3.6c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8zm4 0c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8z"/></svg>
@@ -66,102 +116,243 @@
     </div>
   </header>
 
-  <!-- 主体内容 -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
     
-    <!-- 顶部广告位预留（Google AdSense 规范位） -->
-    <div class="w-full bg-slate-100/80 border border-dashed border-slate-300 rounded-xl p-3 text-center">
-      <div class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-1">Sponsored · 广告位预留 (Google AdSense)</div>
-      <div class="h-14 sm:h-16 flex items-center justify-center text-xs text-slate-400 bg-white/60 rounded border border-slate-200">
-        网站有稳定访客后，在此处粘贴 Google AdSense 广告单元代码
+    <!-- Top AdSense Placeholder -->
+    <div class="w-full bg-slate-100/80 border border-dashed border-slate-300 rounded-xl p-2.5 text-center">
+      <div class="text-[10px] font-semibold tracking-wider text-slate-400 uppercase mb-0.5">Sponsored · 广告位预留 (Google AdSense 728x90)</div>
+      <div class="h-12 sm:h-14 flex items-center justify-center text-xs text-slate-400 bg-white/60 rounded border border-slate-200">
+        Google AdSense 全球精准外贸/国际货代/跨境支付广告自动展示区
       </div>
     </div>
 
-    <!-- 搜索区域 -->
-    <div class="bg-gradient-to-br from-white to-blue-50/40 p-6 sm:p-8 rounded-2xl border border-blue-100 shadow-sm relative overflow-hidden">
-      <div class="max-w-3xl mx-auto text-center space-y-3">
-        <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+    <!-- Hero Search & Quick Filter Card -->
+    <div class="bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 text-white p-6 sm:p-8 rounded-2xl shadow-lg relative overflow-hidden">
+      <div class="max-w-4xl mx-auto text-center space-y-3 relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          2026 全球海关协调制度同步 · 收录 85+ 出海高频大类
+        </div>
+        <h1 id="hero-title" class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
           全球 HS 编码与多国进口关税反查
         </h1>
-        <p class="text-sm sm:text-base text-slate-600">
-          支持输入 6 位编码、中文商品名或英文关键词。即刻查询美国基础税率、301 关税、欧盟及英国关税。
+        <p id="hero-subtitle" class="text-xs sm:text-sm text-blue-100/80 max-w-2xl mx-auto">
+          输入 6 位 HS 编码、中文商品名或英文关键词（如 8471.30 / 光伏 / 无人机 / 咖啡机 / 助听器），0 秒直出美国基础税率、301 附加税、欧盟及英国关税。
         </p>
 
-        <!-- 搜索输入框 -->
-        <div class="relative mt-4">
+        <!-- Search Input Bar -->
+        <div class="relative mt-4 max-w-3xl mx-auto">
           <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </div>
           <input 
             type="text" 
             id="search-input" 
-            placeholder="搜索 HS 编码 (如 8471.30)、中文品名 (如 笔记本/家具/T恤) 或英文 (Laptops)..." 
-            class="w-full pl-11 pr-24 py-3.5 sm:py-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm sm:text-base placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all"
+            placeholder="搜索 HS 编码 (如 8541.43)、中文品名 (如 光伏/无人机/微挖/假发/保温杯) 或英文 (Solar/Drone)..." 
+            class="w-full pl-11 pr-28 py-3.5 sm:py-4 bg-white border-0 rounded-xl text-slate-900 text-sm sm:text-base placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/40 shadow-xl transition-all"
           >
-          <div class="absolute inset-y-0 right-1.5 flex items-center">
-            <button id="clear-search-btn" class="hidden text-xs text-slate-400 hover:text-slate-600 px-2 py-1 mr-1">清空</button>
-            <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1.5 rounded-lg border border-slate-200 hidden sm:inline-block font-mono">秒级筛选</span>
+          <div class="absolute inset-y-0 right-2 flex items-center gap-1">
+            <button id="clear-search-btn" class="hidden text-xs font-medium text-slate-500 hover:text-rose-600 bg-slate-100 px-2.5 py-1.5 rounded-lg">清空</button>
+            <span class="text-xs bg-blue-600 text-white px-2.5 py-1.5 rounded-lg hidden sm:inline-block font-semibold">秒级筛选</span>
           </div>
         </div>
 
-        <!-- 筛选分类标签 -->
-        <div class="flex flex-wrap items-center justify-center gap-2 pt-2" id="category-pills">
-          <button class="cat-pill active text-xs font-medium px-3 py-1.5 rounded-full bg-blue-600 text-white transition-colors" data-category="ALL">全部品类</button>
-          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="电子与信息技术">电子/IT设备</button>
-          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="家具与家居用品">家具/家居</button>
-          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="纺织品与服装">纺织/服装</button>
-          <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="机械与汽配">机械/汽配/原料</button>
+        <!-- Hot Search Tags for Instant Testing -->
+        <div class="flex flex-wrap items-center justify-center gap-1.5 pt-2 text-xs text-blue-200">
+          <span class="opacity-75">🔥 出海热搜：</span>
+          <button class="hot-tag hover:text-white underline decoration-blue-400/50 px-1.5 py-0.5 rounded hover:bg-white/10 transition-colors" data-query="光伏">光伏组件(8541.43)</button>
+          <button class="hot-tag hover:text-white underline decoration-blue-400/50 px-1.5 py-0.5 rounded hover:bg-white/10 transition-colors" data-query="储能">锂电储能(8507.60)</button>
+          <button class="hot-tag hover:text-white underline decoration-blue-400/50 px-1.5 py-0.5 rounded hover:bg-white/10 transition-colors" data-query="挖掘机">小型微挖(8429.52)</button>
+          <button class="hot-tag hover:text-white underline decoration-blue-400/50 px-1.5 py-0.5 rounded hover:bg-white/10 transition-colors" data-query="无人机">航拍无人机(8806.22)</button>
+          <button class="hot-tag hover:text-white underline decoration-blue-400/50 px-1.5 py-0.5 rounded hover:bg-white/10 transition-colors" data-query="蓝牙耳机">蓝牙耳机(7.5%低税)</button>
+          <button class="hot-tag hover:text-white underline decoration-blue-400/50 px-1.5 py-0.5 rounded hover:bg-white/10 transition-colors" data-query="0.0%">欧美0%零关税爆品</button>
         </div>
       </div>
     </div>
 
-    <!-- 匹配数量提示 -->
-    <div class="flex items-center justify-between text-xs text-slate-500 px-1">
-      <div>共匹配到 <span id="match-count" class="font-bold text-blue-600">0</span> 项海关编码记录</div>
-      <div class="flex items-center space-x-3">
-        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>实时海关规则库</span>
-        <span class="text-slate-300">|</span>
-        <span>货币单位：美元 (USD)</span>
+    <!-- Category & Duty Filter Bar -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+      <!-- Category Pills -->
+      <div class="flex flex-wrap items-center gap-2" id="category-pills">
+        <span class="text-xs font-bold text-slate-400 uppercase mr-1">行业分类:</span>
+        <button class="cat-pill active text-xs font-medium px-3 py-1.5 rounded-full bg-blue-600 text-white transition-colors" data-category="ALL">全部品类</button>
+        <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="电子与信息技术">电子/IT设备</button>
+        <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="新能源与光伏">新能源/光伏</button>
+        <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="家具与家居用品">家具/家居</button>
+        <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="纺织品与服装">纺织/服装</button>
+        <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="机械与汽配">机械/汽配/原料</button>
+        <button class="cat-pill text-xs font-medium px-3 py-1.5 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-colors" data-category="医疗与个护">医疗/个护/玩具</button>
+      </div>
+
+      <!-- Special Tariff Rate Quick Filters -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+        <div class="flex flex-wrap items-center gap-1.5" id="rate-pills">
+          <span class="text-xs font-bold text-slate-400 uppercase mr-1">选品税率筛选:</span>
+          <button class="rate-pill active text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-800 text-white transition-colors" data-rate="ALL">全部税率</button>
+          <button class="rate-pill text-xs font-medium px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors" data-rate="EU_FREE">🇪🇺 欧盟 0% 零关税</button>
+          <button class="rate-pill text-xs font-medium px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 transition-colors" data-rate="US_LOW">🇺🇸 美国低税黄金品 (≤15%)</button>
+          <button class="rate-pill text-xs font-medium px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition-colors" data-rate="US_HIGH">⚠️ 高税/反倾销预警 (≥30%)</button>
+        </div>
+        <div class="text-xs text-slate-500">
+          当前匹配 <span id="match-count" class="font-bold text-blue-600 text-sm">85</span> 项出海商品编码
+        </div>
       </div>
     </div>
 
-    <!-- 结果卡片容器 -->
+    <!-- Results Grid -->
     <div id="results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <!-- 由 JS 动态渲染 -->
+      <!-- Cards dynamically injected via JS -->
     </div>
 
-    <!-- 空结果状态 -->
+    <!-- Empty State -->
     <div id="empty-state" class="hidden text-center py-12 bg-white rounded-2xl border border-slate-200">
       <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
       <h3 class="text-base font-semibold text-slate-800">未找到匹配的海关编码</h3>
-      <p class="text-xs text-slate-500 mt-1">请尝试搜索更通用的品名词，或点击右下角微信直接咨询人工归类。</p>
+      <p class="text-xs text-slate-500 mt-1">请尝试点击上方“清空”按钮或切换为“全部品类”，也可点击右下角微信直接人工查询归类。</p>
     </div>
 
-    <!-- 中部广告位预留 -->
+    <!-- Middle AdSense Placeholder -->
     <div class="w-full bg-slate-100/80 border border-dashed border-slate-300 rounded-xl p-3 text-center my-6">
-      <div class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-1">Sponsored · 页面广告位预留 (Google AdSense)</div>
-      <div class="h-16 flex items-center justify-center text-xs text-slate-400 bg-white/60 rounded border border-slate-200">
-        Google 广告自动匹配展示（欧美采购商常看货代物流、外贸软件广告）
+      <div class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-1">Sponsored · 页面中部广告位 (Google AdSense Responsive)</div>
+      <div class="h-20 flex items-center justify-center text-xs text-slate-400 bg-white/60 rounded border border-slate-200">
+        Google AdSense 高单价广告位（欧美采购商与出海商家高频浏览区域）
       </div>
     </div>
 
+    <!-- SEO Static Full Directory -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
+      <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <h2 class="text-base font-bold text-slate-900">2026 全球外贸出海热门品类 HS 编码与美欧关税全量索引目录</h2>
+          <p class="text-xs text-slate-500 mt-0.5">点击任意品类编码即可直接定位并打开多国清关税金计算器（支持直接分享单品专属链接）</p>
+        </div>
+        <span class="text-[11px] font-mono bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded border border-emerald-200 self-start">Google SEO 全量静态索引区</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2" id="seo-directory-grid">
+        <button type="button" data-hscode="8471.30" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8471.30 <span class="text-rose-600 font-normal float-right">US:35.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">便携式自动数据处理设备</div><div class="text-[10px] text-slate-400 truncate">Laptops · EU:0.0%</div></button>
+<button type="button" data-hscode="8517.13" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8517.13 <span class="text-rose-600 font-normal float-right">US:35.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">智能手机</div><div class="text-[10px] text-slate-400 truncate">Smartphones for Cellular Networks · EU:0.0%</div></button>
+<button type="button" data-hscode="8471.50" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8471.50 <span class="text-rose-600 font-normal float-right">US:35.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">台式计算机与工业主机服务器</div><div class="text-[10px] text-slate-400 truncate">Desktop Computers · EU:0.0%</div></button>
+<button type="button" data-hscode="8473.30" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8473.30 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">计算机零配件</div><div class="text-[10px] text-slate-400 truncate">Computer Parts & Accessories (GPUs · EU:0.0%</div></button>
+<button type="button" data-hscode="8504.40" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8504.40 <span class="text-rose-600 font-normal float-right">US:35.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">静止式变流器</div><div class="text-[10px] text-slate-400 truncate">Static Converters · EU:2.1%</div></button>
+<button type="button" data-hscode="8544.42" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8544.42 <span class="text-rose-600 font-normal float-right">US:35.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">装有接插件的电导体</div><div class="text-[10px] text-slate-400 truncate">USB-C Data Cables · EU:3.3%</div></button>
+<button type="button" data-hscode="8534.00" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8534.00 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">印制电路板</div><div class="text-[10px] text-slate-400 truncate">Printed Circuit Boards (Rigid & Flexible PCBs) · EU:0.0%</div></button>
+<button type="button" data-hscode="8806.22" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8806.22 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">消费级航拍与行业植保无人机</div><div class="text-[10px] text-slate-400 truncate">Unmanned Aircraft · EU:0.0%</div></button>
+<button type="button" data-hscode="8525.89" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8525.89 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">网络安防监控摄像机与运动数码相机</div><div class="text-[10px] text-slate-400 truncate">IP Security Surveillance Cameras & Action Cameras · EU:0.0%</div></button>
+<button type="button" data-hscode="8518.30" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8518.30 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">TWS真无线蓝牙耳机与头戴式降噪耳机</div><div class="text-[10px] text-slate-400 truncate">TWS Wireless Bluetooth Earbuds & Noise-Cancelling Headphones · EU:0.0%</div></button>
+<button type="button" data-hscode="8517.62" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8517.62 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">智能穿戴设备</div><div class="text-[10px] text-slate-400 truncate">Smartwatches · EU:0.0%</div></button>
+<button type="button" data-hscode="8528.52" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8528.52 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">液晶电脑显示器与电竞曲面显示屏</div><div class="text-[10px] text-slate-400 truncate">LCD & LED Computer Monitors · EU:0.0%</div></button>
+<button type="button" data-hscode="8528.62" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8528.62 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">智能便携家用投影仪与激光超短焦投影机</div><div class="text-[10px] text-slate-400 truncate">Smart Portable Projectors & Laser Home Theater Projectors · EU:0.0%</div></button>
+<button type="button" data-hscode="8471.60" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8471.60 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">机械键盘、无线游戏鼠标与手绘数位板</div><div class="text-[10px] text-slate-400 truncate">Mechanical Keyboards · EU:0.0%</div></button>
+<button type="button" data-hscode="8523.51" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8523.51 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">固态硬盘</div><div class="text-[10px] text-slate-400 truncate">Solid-State Drives (SSD) · EU:0.0%</div></button>
+<button type="button" data-hscode="8443.32" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8443.32 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">桌面级3D打印机、激光打印机与条码热敏打印机</div><div class="text-[10px] text-slate-400 truncate">3D Printers · EU:0.0%</div></button>
+<button type="button" data-hscode="8541.43" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8541.43 <span class="text-rose-600 font-normal float-right">US:50.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">光伏太阳能电池板组件</div><div class="text-[10px] text-slate-400 truncate">Photovoltaic Solar Panels & Monocrystalline Modules · EU:0.0%</div></button>
+<button type="button" data-hscode="8507.60" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8507.60 <span class="text-rose-600 font-normal float-right">US:28.4%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">锂离子蓄电池</div><div class="text-[10px] text-slate-400 truncate">LiFePO4 Energy Storage Batteries & Portable Power Stations · EU:2.7%</div></button>
+<button type="button" data-hscode="8504.40.95" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8504.40.95 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">光储充一体并网逆变器与离网光伏控制器</div><div class="text-[10px] text-slate-400 truncate">Hybrid Solar Inverters & MPPT Charge Controllers · EU:0.0%</div></button>
+<button type="button" data-hscode="8537.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8537.10 <span class="text-rose-600 font-normal float-right">US:27.7%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">新能源汽车直流快充桩与家用交流壁挂充电盒</div><div class="text-[10px] text-slate-400 truncate">EV Fast Charging Stations & AC Wallbox Chargers · EU:2.1%</div></button>
+<button type="button" data-hscode="8419.12" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8419.12 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">太阳能真空管热水器与空气源热泵采暖机组</div><div class="text-[10px] text-slate-400 truncate">Solar Water Heaters & Air-Source Heat Pumps · EU:2.6%</div></button>
+<button type="button" data-hscode="8502.31" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8502.31 <span class="text-rose-600 font-normal float-right">US:27.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">中小型风力发电机组与风光互补离网发电系统</div><div class="text-[10px] text-slate-400 truncate">Wind-Powered Generating Sets & Small Wind Turbines · EU:2.7%</div></button>
+<button type="button" data-hscode="8501.32" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8501.32 <span class="text-rose-600 font-normal float-right">US:27.8%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">光伏追踪支架伺服电机与直流无刷电机</div><div class="text-[10px] text-slate-400 truncate">DC Brushless Motors for Solar Trackers & EVs · EU:2.7%</div></button>
+<button type="button" data-hscode="8458.11" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8458.11 <span class="text-rose-600 font-normal float-right">US:29.4%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">数控金属切削卧式车床与车铣复合加工中心</div><div class="text-[10px] text-slate-400 truncate">CNC Horizontal Metal Lathes & Turning Centers · EU:1.7%</div></button>
+<button type="button" data-hscode="8456.11" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8456.11 <span class="text-rose-600 font-normal float-right">US:27.4%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">光纤激光切割机、手持激光焊接机与打标机</div><div class="text-[10px] text-slate-400 truncate">Fiber Laser Cutting · EU:2.2%</div></button>
+<button type="button" data-hscode="8429.52" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8429.52 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">360度全回转履带式液压挖掘机与小型微挖</div><div class="text-[10px] text-slate-400 truncate">Mini Excavators & 360-Degree Revolving Hydraulic Shovels · EU:0.0%</div></button>
+<button type="button" data-hscode="8427.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8427.10 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">电动仓储叉车、锂电托盘搬运车与堆高车</div><div class="text-[10px] text-slate-400 truncate">Electric Forklift Trucks & Powered Pallet Stackers · EU:4.5%</div></button>
+<button type="button" data-hscode="8477.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8477.10 <span class="text-rose-600 font-normal float-right">US:28.1%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">全自动伺服节能塑料注塑成型机与吹瓶机</div><div class="text-[10px] text-slate-400 truncate">Plastic Injection Molding & Blow Molding Machines · EU:1.7%</div></button>
+<button type="button" data-hscode="8422.30" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8422.30 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">全自动液体灌装机、贴标机与食品真空包装机</div><div class="text-[10px] text-slate-400 truncate">Automatic Filling · EU:1.7%</div></button>
+<button type="button" data-hscode="8482.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8482.10 <span class="text-rose-600 font-normal float-right">US:34.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">精密深沟球轴承、圆锥滚子轴承与直线导轨轴承</div><div class="text-[10px] text-slate-400 truncate">Deep Groove Ball Bearings & Roller Bearings · EU:8.0%</div></button>
+<button type="button" data-hscode="8481.80" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8481.80 <span class="text-rose-600 font-normal float-right">US:30.6%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">不锈钢工业球阀、蝶阀、止回阀与卫浴水龙头</div><div class="text-[10px] text-slate-400 truncate">Industrial Stainless Steel Valves · EU:2.2%</div></button>
+<button type="button" data-hscode="7318.15" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 7318.15 <span class="text-rose-600 font-normal float-right">US:25.0% - 31.2%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">高强度合金钢螺栓、六角螺母与不锈钢紧固件</div><div class="text-[10px] text-slate-400 truncate">Steel Bolts · EU:3.7%</div></button>
+<button type="button" data-hscode="8711.60" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8711.60 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">锂电助力电动自行车</div><div class="text-[10px] text-slate-400 truncate">Electric Bicycles (E-Bikes) · EU:6.0%</div></button>
+<button type="button" data-hscode="8708.29" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8708.29 <span class="text-rose-600 font-normal float-right">US:27.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">汽车车身冲压件、改装前后保险杠与碳纤维尾翼配件</div><div class="text-[10px] text-slate-400 truncate">Auto Body Parts · EU:4.5%</div></button>
+<button type="button" data-hscode="8708.30" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8708.30 <span class="text-rose-600 font-normal float-right">US:27.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">汽车陶瓷刹车片、通风制动盘与液压制动卡钳</div><div class="text-[10px] text-slate-400 truncate">Automotive Ceramic Brake Pads · EU:3.0%</div></button>
+<button type="button" data-hscode="8708.80" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8708.80 <span class="text-rose-600 font-normal float-right">US:27.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">汽车悬挂减震器、空气悬架气囊与控制臂摆臂</div><div class="text-[10px] text-slate-400 truncate">Automotive Suspension Shock Absorbers · EU:3.5%</div></button>
+<button type="button" data-hscode="8708.70" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8708.70 <span class="text-rose-600 font-normal float-right">US:27.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">汽车锻造铝合金轮毂与越野钢圈配件</div><div class="text-[10px] text-slate-400 truncate">Forged Aluminum Alloy Road Wheels & Rims · EU:3.0%</div></button>
+<button type="button" data-hscode="4011.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 4011.10 <span class="text-rose-600 font-normal float-right">US:29.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">小客车用充气子午线橡胶新轮胎与越野雪地胎</div><div class="text-[10px] text-slate-400 truncate">New Pneumatic Radial Rubber Tires for Passenger Cars · EU:4.5%</div></button>
+<button type="button" data-hscode="8512.20" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8512.20 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">汽车LED前大灯总成、贯穿式尾灯与越野长条工作灯</div><div class="text-[10px] text-slate-400 truncate">Automotive LED Headlights · EU:2.7%</div></button>
+<button type="button" data-hscode="8467.21" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8467.21 <span class="text-rose-600 font-normal float-right">US:26.8%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">无刷锂电手电钻、冲击扳手、角磨机与电动工具套装</div><div class="text-[10px] text-slate-400 truncate">Cordless Brushless Electric Drills · EU:2.7%</div></button>
+<button type="button" data-hscode="8433.11" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8433.11 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">智能割草机器人、锂电手推割草机与园林修枝机</div><div class="text-[10px] text-slate-400 truncate">Robotic Lawn Mowers · EU:0.0%</div></button>
+<button type="button" data-hscode="7610.90" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 7610.90 <span class="text-rose-600 font-normal float-right">US:30.7%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">工业铝型材框架、光伏铝合金支架与断桥铝门窗型材</div><div class="text-[10px] text-slate-400 truncate">Aluminum Profiles · EU:6.0%</div></button>
+<button type="button" data-hscode="8418.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8418.10 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">装有独立外门的冷藏-冷冻组合机</div><div class="text-[10px] text-slate-400 truncate">Combined Refrigerator-Freezers with Separate Doors · EU:2.2%</div></button>
+<button type="button" data-hscode="9403.60" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9403.60 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">实木与板式木质家具</div><div class="text-[10px] text-slate-400 truncate">Wooden Dining Tables · EU:2.7%</div></button>
+<button type="button" data-hscode="9401.61" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9401.61 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">真皮与科技布软包沙发、功能太空舱单人沙发椅</div><div class="text-[10px] text-slate-400 truncate">Upholstered Fabric & Leather Sofas · EU:2.7%</div></button>
+<button type="button" data-hscode="9401.31" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9401.31 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">人体工学网布办公转椅与电竞游戏升降椅</div><div class="text-[10px] text-slate-400 truncate">Ergonomic Mesh Office Swivel Chairs & Gaming Chairs · EU:0.0%</div></button>
+<button type="button" data-hscode="9403.20" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9403.20 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">双电机电动升降办公桌架、重型仓储货架与户外铝制家具</div><div class="text-[10px] text-slate-400 truncate">Electric Standing Desks · EU:0.0%</div></button>
+<button type="button" data-hscode="9405.42" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9405.42 <span class="text-rose-600 font-normal float-right">US:31.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">LED智能吸顶灯、太阳能户外庭院投光灯与植物生长灯</div><div class="text-[10px] text-slate-400 truncate">LED Ceiling Lights · EU:2.7%</div></button>
+<button type="button" data-hscode="9405.11" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9405.11 <span class="text-rose-600 font-normal float-right">US:28.9%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">现代水晶吊灯、北欧装饰壁灯与风扇吊灯</div><div class="text-[10px] text-slate-400 truncate">Chandeliers · EU:3.7%</div></button>
+<button type="button" data-hscode="9404.21" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9404.21 <span class="text-rose-600 font-normal float-right">US:28.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">真空压缩卷包记忆棉床垫与天然乳胶床垫</div><div class="text-[10px] text-slate-400 truncate">Memory Foam & Latex Mattresses in a Box · EU:3.7%</div></button>
+<button type="button" data-hscode="6907.21" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6907.21 <span class="text-rose-600 font-normal float-right">US:33.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">全抛釉大板瓷砖、防滑木纹砖与岩板背景墙</div><div class="text-[10px] text-slate-400 truncate">Glazed Porcelain Tiles & Sintered Stone Slabs · EU:5.0%</div></button>
+<button type="button" data-hscode="8508.11" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8508.11 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">激光导航扫地机器人、洗地机与无线手持吸尘器</div><div class="text-[10px] text-slate-400 truncate">Robot Vacuum Cleaners · EU:1.7%</div></button>
+<button type="button" data-hscode="8516.60" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8516.60 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">多功能空气炸锅、电磁炉与嵌入式电烤箱</div><div class="text-[10px] text-slate-400 truncate">Air Fryers · EU:2.7%</div></button>
+<button type="button" data-hscode="8516.71" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8516.71 <span class="text-rose-600 font-normal float-right">US:10.9%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">半自动意式浓缩咖啡机与全自动现磨咖啡机</div><div class="text-[10px] text-slate-400 truncate">Espresso Coffee Makers & Automatic Drip Coffee Machines · EU:2.7%</div></button>
+<button type="button" data-hscode="7323.93" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 7323.93 <span class="text-rose-600 font-normal float-right">US:9.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">不锈钢保温杯、车载冰霸杯与厨房不锈钢汤锅餐具</div><div class="text-[10px] text-slate-400 truncate">Stainless Steel Insulated Tumblers · EU:3.2%</div></button>
+<button type="button" data-hscode="3924.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 3924.10 <span class="text-rose-600 font-normal float-right">US:10.9%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">食品级硅胶餐具、塑料保鲜盒与厨房收纳用品</div><div class="text-[10px] text-slate-400 truncate">Plastic & Silicone Tableware · EU:6.5%</div></button>
+<button type="button" data-hscode="9406.90" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9406.90 <span class="text-rose-600 font-normal float-right">US:27.9%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">太空舱移动民宿房、折叠集装箱房屋与户外铝合金阳光房</div><div class="text-[10px] text-slate-400 truncate">Prefabricated Capsule Houses · EU:2.7%</div></button>
+<button type="button" data-hscode="8415.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8415.10 <span class="text-rose-600 font-normal float-right">US:27.2%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">分体式变频冷暖壁挂空调与移动便携式空调</div><div class="text-[10px] text-slate-400 truncate">Split Inverter Air Conditioners & Portable AC Units · EU:2.2%</div></button>
+<button type="button" data-hscode="8301.40" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8301.40 <span class="text-rose-600 font-normal float-right">US:30.7%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">指纹密码智能门锁、蓝牙挂锁与家用机械防盗锁</div><div class="text-[10px] text-slate-400 truncate">Smart Fingerprint Door Locks · EU:2.7%</div></button>
+<button type="button" data-hscode="9505.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9505.10 <span class="text-rose-600 font-normal float-right">US:0.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">圣诞节装饰品、仿真圣诞树、节日彩灯串与万圣节派对用品</div><div class="text-[10px] text-slate-400 truncate">Christmas Decorations · EU:0.0%</div></button>
+<button type="button" data-hscode="4819.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 4819.10 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">定制瓦楞纸箱、飞机盒、彩印礼盒与牛皮纸包装袋</div><div class="text-[10px] text-slate-400 truncate">Corrugated Paper Cartons · EU:0.0%</div></button>
+<button type="button" data-hscode="6109.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6109.10 <span class="text-rose-600 font-normal float-right">US:24.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">重磅纯棉针织T恤衫、文化衫与落肩卫衣背心</div><div class="text-[10px] text-slate-400 truncate">100% Cotton Knitted T-Shirts · EU:12.0%</div></button>
+<button type="button" data-hscode="6104.63" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6104.63 <span class="text-rose-600 font-normal float-right">US:35.7%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">锦纶氨纶高弹瑜伽裤、运动健身紧身裤与骑行裤</div><div class="text-[10px] text-slate-400 truncate">Women's Synthetic Fiber Yoga Pants · EU:12.0%</div></button>
+<button type="button" data-hscode="6110.20" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6110.20 <span class="text-rose-600 font-normal float-right">US:24.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">棉制连帽卫衣、开衫毛衣与抓绒套头衫</div><div class="text-[10px] text-slate-400 truncate">Cotton Hoodies · EU:12.0%</div></button>
+<button type="button" data-hscode="6203.42" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6203.42 <span class="text-rose-600 font-normal float-right">US:24.1%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">男式水洗弹力牛仔裤、工装多袋长裤与休闲短裤</div><div class="text-[10px] text-slate-400 truncate">Men's Denim Jeans · EU:12.0%</div></button>
+<button type="button" data-hscode="6201.40" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6201.40 <span class="text-rose-600 font-normal float-right">US:14.6%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">户外防风防水冲锋衣、白鸭绒羽绒服与滑雪棉服</div><div class="text-[10px] text-slate-400 truncate">Outdoor Waterproof Jackets · EU:12.0%</div></button>
+<button type="button" data-hscode="6112.41" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6112.41 <span class="text-rose-600 font-normal float-right">US:32.4%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">女式连体泳衣、比基尼分体泳装与冲浪防晒服</div><div class="text-[10px] text-slate-400 truncate">Women's Synthetic Knitted Swimwear · EU:12.0%</div></button>
+<button type="button" data-hscode="4202.12" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 4202.12 <span class="text-rose-600 font-normal float-right">US:45.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">PC/ABS万向轮登机拉杆箱、双肩电脑背包与手提包</div><div class="text-[10px] text-slate-400 truncate">Hardside Spinner Luggage · EU:9.7%</div></button>
+<button type="button" data-hscode="6404.11" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6404.11 <span class="text-rose-600 font-normal float-right">US:27.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">透气网面跑步运动鞋、气垫篮球鞋与板鞋</div><div class="text-[10px] text-slate-400 truncate">Athletic Running Shoes · EU:16.9%</div></button>
+<button type="button" data-hscode="6402.99" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6402.99 <span class="text-rose-600 font-normal float-right">US:13.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">EVA踩屎感居家拖鞋、洞洞鞋与防滑凉鞋</div><div class="text-[10px] text-slate-400 truncate">EVA Foam Slides · EU:17.0%</div></button>
+<button type="button" data-hscode="6302.31" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6302.31 <span class="text-rose-600 font-normal float-right">US:14.2%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">高支长绒棉酒店床上四件套、天丝被套与床单</div><div class="text-[10px] text-slate-400 truncate">Cotton Bed Linen · EU:12.0%</div></button>
+<button type="button" data-hscode="6306.22" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6306.22 <span class="text-rose-600 font-normal float-right">US:16.3%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">户外自动充气露营帐篷、车顶帐篷与天幕遮阳棚</div><div class="text-[10px] text-slate-400 truncate">Outdoor Camping Tents · EU:12.0%</div></button>
+<button type="button" data-hscode="7117.19" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 7117.19 <span class="text-rose-600 font-normal float-right">US:18.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">钛钢镀金时尚首饰、莫桑石戒指、项链耳环与仿真饰品</div><div class="text-[10px] text-slate-400 truncate">Imitation Jewelry · EU:4.0%</div></button>
+<button type="button" data-hscode="9018.90" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9018.90 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">一次性医用耗材、家用电子血压计与心电监测仪</div><div class="text-[10px] text-slate-400 truncate">Medical Instruments · EU:0.0%</div></button>
+<button type="button" data-hscode="9018.12" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9018.12 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">医用便携式B超机与彩色多普勒超声诊断仪</div><div class="text-[10px] text-slate-400 truncate">Ultrasonic Scanning Diagnostic Apparatus (Handheld Ultrasound) · EU:0.0%</div></button>
+<button type="button" data-hscode="9021.40" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9021.40 <span class="text-rose-600 font-normal float-right">US:0.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">无线蓝牙数字助听器与辅听器设备</div><div class="text-[10px] text-slate-400 truncate">Digital Hearing Aids & OTC Sound Amplifiers · EU:0.0%</div></button>
+<button type="button" data-hscode="8713.90" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8713.90 <span class="text-rose-600 font-normal float-right">US:0.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">轻量化碳纤维电动轮椅与老年医疗代步车</div><div class="text-[10px] text-slate-400 truncate">Electric Wheelchairs & Mobility Scooters for Disabled · EU:0.0%</div></button>
+<button type="button" data-hscode="8543.70" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8543.70 <span class="text-rose-600 font-normal float-right">US:27.6%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">冰点激光脱毛仪、红光LED美容面罩与射频美容仪</div><div class="text-[10px] text-slate-400 truncate">IPL Hair Removal Handsets · EU:2.2%</div></button>
+<button type="button" data-hscode="8510.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 8510.10 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">电动往复式剃须刀、理发器电推剪与鼻毛修剪器</div><div class="text-[10px] text-slate-400 truncate">Electric Shavers · EU:2.2%</div></button>
+<button type="button" data-hscode="9019.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9019.10 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">深层肌肉筋膜枪、眼部热敷按摩仪与电动按摩椅</div><div class="text-[10px] text-slate-400 truncate">Percussion Massage Guns · EU:0.0%</div></button>
+<button type="button" data-hscode="6704.11" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 6704.11 <span class="text-rose-600 font-normal float-right">US:0.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">真人发蕾丝头套假发、化纤编织发帘与接发片</div><div class="text-[10px] text-slate-400 truncate">Human Hair Lace Front Wigs · EU:2.2%</div></button>
+<button type="button" data-hscode="3304.99" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 3304.99 <span class="text-rose-600 font-normal float-right">US:25.0%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">玻尿酸护肤精华液、防晒霜、穿戴甲与彩妆礼盒</div><div class="text-[10px] text-slate-400 truncate">Facial Serums · EU:0.0%</div></button>
+<button type="button" data-hscode="9503.00" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9503.00 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">潮玩盲盒手办、遥控模型车、益智积木与毛绒玩具</div><div class="text-[10px] text-slate-400 truncate">Collectible Blind Box Figures · EU:0.0%</div></button>
+<button type="button" data-hscode="9506.91" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9506.91 <span class="text-rose-600 font-normal float-right">US:12.1%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">家用折叠跑步机、划船机、包胶哑铃与普拉提核心床</div><div class="text-[10px] text-slate-400 truncate">Folding Treadmills · EU:2.7%</div></button>
+<button type="button" data-hscode="9506.29" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9506.29 <span class="text-rose-600 font-normal float-right">US:7.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">充气式桨板</div><div class="text-[10px] text-slate-400 truncate">Inflatable Stand-Up Paddleboards (SUP) · EU:2.7%</div></button>
+<button type="button" data-hscode="9004.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9004.10 <span class="text-rose-600 font-normal float-right">US:9.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">偏光太阳镜、时尚墨镜、防蓝光光学眼镜架与骑行风镜</div><div class="text-[10px] text-slate-400 truncate">Polarized Sunglasses · EU:2.9%</div></button>
+<button type="button" data-hscode="9507.10" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 9507.10 <span class="text-rose-600 font-normal float-right">US:13.5%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">碳纤维路亚钓鱼竿、纺车轮渔轮与仿生鱼饵</div><div class="text-[10px] text-slate-400 truncate">Carbon Fiber Fishing Rods · EU:3.7%</div></button>
+<button type="button" data-hscode="4201.00" class="seo-quick-link w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-colors block"><div class="font-mono font-bold text-blue-700 text-xs">HS 4201.00 <span class="text-rose-600 font-normal float-right">US:9.9%</span></div><div class="text-xs font-medium text-slate-800 truncate mt-0.5">宠物防爆冲牵引绳、猫抓板猫爬架与智能猫砂盆</div><div class="text-[10px] text-slate-400 truncate">Pet Leashes · EU:2.7%</div></button>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
+      <h2 class="text-base font-bold text-slate-900">外贸清关与欧美关税常见问题指南 (Exporter & Importer FAQ)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600 leading-relaxed">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+          <h3 class="font-bold text-slate-900 text-sm">1. 美国进口综合关税是怎么计算的？</h3>
+          <p>中国出口美国的商品综合税率 = <strong>MFN 最惠国基准税率 + 301 条款附加关税</strong>（清单1/2/3为25%，清单4A为7.5%，光伏等特定品类为50%）+ 特定行业反倾销/反补贴税（AD/CVD）。本工具已为您自动合并计算综合税率。</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+          <h3 class="font-bold text-slate-900 text-sm">2. 哪些出海产品目前享有欧美 0% 零关税红利？</h3>
+          <p>点击上方<strong>“🇪🇺 欧盟 0% 零关税”</strong>或<strong>“🇺🇸 美国低税黄金品”</strong>筛选按钮即可一键查看。例如数字助听器(9021.40)、电动轮椅(8713.90)、圣诞装饰品(9505.10)、真人发假发在美国均享 0% 综合关税；光伏板、笔记本电脑、割草机器人在欧盟享 0% 基准关税。</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- 页脚 -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 space-y-2">
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 space-y-2 mt-8">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
       <div class="flex items-center space-x-2">
-        <span class="font-bold text-slate-700">GlobalTrade HS Navigator</span>
+        <span class="font-bold text-slate-700">GlobalTrade HS Navigator Pro</span>
         <span>·</span>
         <span>GitHub Pages 极速托管</span>
       </div>
       <div>
-        关税数据参考 WCO 协调制度与各口岸海关公报 · 最终报关请以目的港清关行实审为准
+        数据参考 WCO 协调制度、USITC HTSUS、EU TARIC 及 UKGT 官方税则 · 最终报关请以目的港清关行实审为准
       </div>
     </div>
   </footer>
 
-  <!-- 右下角悬浮微信按钮 -->
+  <!-- Floating WeChat Button -->
   <aside class="fixed bottom-6 right-6 z-40">
     <button id="floating-wechat-btn" class="group flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 focus:outline-none">
       <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M8.5 3C4.9 3 2 5.5 2 8.6c0 1.8 1 3.4 2.6 4.4L4 16l3.3-1.6c.4.1.8.2 1.2.2.3 0 .6 0 .9-.1-.2-.5-.3-1.1-.3-1.7 0-3.3 3.1-6 7-6 .4 0 .8 0 1.2.1C16.1 4.7 12.6 3 8.5 3zm-2 4.4c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm4 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm5.5 4.4c-3.3 0-6 2.2-6 5s2.7 5 6 5c.4 0 .7 0 1.1-.1L20 23l-.7-2.4c1.6-.9 2.7-2.4 2.7-3.8 0-2.8-2.7-5-6-5zm-2 3.6c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8zm4 0c.4 0 .8.3.8.8 0 .4-.4.8-.8.8s-.8-.4-.8-.8c0-.5.4-.8.8-.8z"/></svg>
@@ -169,43 +360,47 @@
     </button>
   </aside>
 
-  <!-- 弹窗 1：税费试算器 -->
+  <!-- Modal 1: Duty Calculator -->
   <div id="calculator-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
     <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
         <div>
           <span id="modal-hs" class="text-xs font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">8471.30</span>
           <h3 id="modal-title" class="text-base font-bold text-slate-900 mt-1">便携式电脑 / 笔记本电脑</h3>
+          <p id="modal-en-title" class="text-xs text-slate-500 mt-0.5"></p>
         </div>
         <button id="close-modal-btn" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
-      <div class="space-y-3">
-        <label class="block text-xs font-semibold text-slate-700">预估申报货值 (FOB/CIF USD $)</label>
+      <div class="space-y-2">
+        <label class="block text-xs font-semibold text-slate-700">输入申报货值 (FOB/CIF Invoice Value USD $)</label>
         <div class="relative">
           <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-sm">$</span>
-          <input type="number" id="calc-invoice-val" value="10000" class="w-full pl-7 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input type="number" id="calc-invoice-val" value="10000" min="0" class="w-full pl-7 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm font-bold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
       </div>
 
-      <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2 text-xs">
-        <div class="font-bold text-slate-800 border-b border-slate-200 pb-1 mb-2">多国清关预计关税试算</div>
+      <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2.5 text-xs">
+        <div class="font-bold text-slate-800 border-b border-slate-200 pb-1.5 mb-2 flex justify-between">
+          <span>目的国清关预计关税明细</span>
+          <span class="text-slate-400 font-normal">不含目的港增值税(VAT)/杂费</span>
+        </div>
         
         <div class="flex items-center justify-between">
-          <span class="text-slate-600">美国 (基准 + 301 综合税率 <span id="modal-us-rate" class="font-bold text-rose-600">35.0%</span>):</span>
+          <span class="text-slate-600">🇺🇸 美国综合关税 (<span id="modal-us-rate" class="font-bold text-rose-600">35.0%</span>):</span>
           <span id="modal-us-val" class="font-mono font-bold text-rose-600 text-sm">$3,500.00</span>
         </div>
-        <div class="text-[11px] text-slate-400 pl-2">包含基础税率 <span id="modal-us-base">0%</span> 与 301 附加关税</div>
+        <div class="text-[11px] text-slate-400 pl-2">构成：MFN 基准税率 <span id="modal-us-base">0%</span> + 301 条款附加关税 <span id="modal-us-301">35.0%</span></div>
 
         <div class="flex items-center justify-between pt-2 border-t border-slate-200">
-          <span class="text-slate-600">欧盟进口关税 (税率 <span id="modal-eu-rate" class="font-bold text-blue-600">0.0%</span>):</span>
+          <span class="text-slate-600">🇪🇺 欧盟进口关税 (税率 <span id="modal-eu-rate" class="font-bold text-blue-600">0.0%</span>):</span>
           <span id="modal-eu-val" class="font-mono font-bold text-blue-600 text-sm">$0.00</span>
         </div>
 
         <div class="flex items-center justify-between pt-2 border-t border-slate-200">
-          <span class="text-slate-600">英国进口关税 (税率 <span id="modal-uk-rate" class="font-bold text-slate-700">0.0%</span>):</span>
+          <span class="text-slate-600">🇬🇧 英国进口关税 (税率 <span id="modal-uk-rate" class="font-bold text-slate-700">0.0%</span>):</span>
           <span id="modal-uk-val" class="font-mono font-bold text-slate-800 text-sm">$0.00</span>
         </div>
       </div>
@@ -214,7 +409,10 @@
         提示：该品类出运美国受 301 清单严格核验，建议提前让清关代理确认品名与具体规格申报要素。
       </div>
 
-      <div class="flex items-center justify-end space-x-2 pt-2">
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+        <button id="btn-share-link" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1">
+          复制单品专属链接
+        </button>
         <button id="btn-copy-declaration" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-sm transition-colors flex items-center gap-1">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
           一键复制报关要素
@@ -223,7 +421,7 @@
     </div>
   </div>
 
-  <!-- 弹窗 2：微信咨询 -->
+  <!-- Modal 2: WeChat QR Modal -->
   <div id="wechat-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
     <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center relative space-y-4">
       <button id="close-wechat-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
@@ -236,14 +434,14 @@
 
       <div class="space-y-1">
         <h3 class="text-base font-bold text-slate-900">外贸同行交流 & 关税咨询</h3>
-        <p class="text-xs text-slate-500">疑难海关编码归类 · 目的港关税筹划 · 报关避坑</p>
+        <p class="text-xs text-slate-500">疑难海关编码归类 · 目的港双反规避 · 跨境专线对接</p>
       </div>
 
       <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl mx-auto w-48 h-48 flex flex-col items-center justify-center relative shadow-inner">
         <svg class="w-36 h-36 text-slate-800" viewBox="0 0 100 100" fill="currentColor">
           <path d="M0 0h30v30H0V0zm6 6v18h18V6H6zm4 4h10v10H10V10zM70 0h30v30H70V0zm6 6v18h18V6H76zm4 4h10v10H80V10zM0 70h30v30H0V70zm6 6v18h18V76H6zm4 4h10v10H10V80zm40-70h10v10H50V10zm10 10h10v10H60V20zm-20 0h10v10H40V20zm0 20h10v10H40V40zm20 0h10v10H60V40zm-10 10h10v10H50V50zm-10 20h10v10H40V70zm20 0h10v10H60V70zm10 10h10v10H70V80zm10-10h10v10H80V70zm0 20h10v10H80V90zm10-30h10v10H90V60z"/>
         </svg>
-        <span class="text-[10px] text-slate-400 mt-2 font-mono">微信号：外贸交流</span>
+        <span class="text-[10px] text-slate-400 mt-2 font-mono">微信号：外贸关税咨询</span>
       </div>
 
       <p class="text-[11px] text-slate-500">
@@ -252,7 +450,7 @@
     </div>
   </div>
 
-  <!-- 弹窗 3：部署指引 -->
+  <!-- Modal 3: Guide Modal -->
   <div id="guide-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
     <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 relative space-y-4 max-h-[85vh] overflow-y-auto">
       <button id="close-guide-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
@@ -260,246 +458,1356 @@
       </button>
 
       <div class="flex items-center space-x-2 border-b border-slate-100 pb-3">
-        <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">Git</div>
-        <h3 class="text-base font-bold text-slate-900">GitHub Pages 零成本上线与谷歌收录三步法</h3>
+        <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">SEO</div>
+        <h3 class="text-base font-bold text-slate-900">Pro 旗舰版 SEO 自动推流引擎说明</h3>
       </div>
 
       <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
         <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl space-y-1">
-          <div class="font-bold text-blue-900">1. 创建 GitHub 仓库并上传代码</div>
-          <p>在 GitHub.com 新建公开仓库，直接将本代码保存为 <code>index.html</code> 上传至仓库根目录。</p>
+          <div class="font-bold text-blue-900">1. 85+ 出海高频品类全覆盖</div>
+          <p>涵盖电子数码、新能源光伏、机械微挖、汽摩配件、智能家居、跨境服装鞋包、医疗器械与户外爆品，精准命中海内外买家每日热搜词。</p>
         </div>
-
         <div class="p-3 bg-emerald-50 border border-emerald-100 rounded-xl space-y-1">
-          <div class="font-bold text-emerald-900">2. 开启 GitHub Pages 免费公网访问</div>
-          <p>进入仓库 <strong>Settings</strong> -> 左侧 <strong>Pages</strong> -> Build and deployment 选择 <strong>Deploy from a branch (main / root)</strong>，点击 Save 即可获得全球公网链接。</p>
+          <div class="font-bold text-emerald-900">2. 内置 Schema.org 结构化数据与静态长尾索引</div>
+          <p>页面底部自带全量静态长尾锚点链接与 Google 官方认可的 <code>FAQPage</code> + <code>WebApplication</code> JSON-LD，支持 <code>?hs=编码</code> 参数直达，让 Google 爬虫将单个页面裂变为 85+ 个长尾收录入口。</p>
         </div>
-
         <div class="p-3 bg-amber-50 border border-amber-100 rounded-xl space-y-1">
-          <div class="font-bold text-amber-900">3. 提交 Google Search Console 让谷歌自动抓取</div>
-          <p>打开 Google Search Console 添加你的网址，Google 爬虫会依据页面包含的精准 HS 编码关键词自动收录排名。</p>
+          <div class="font-bold text-amber-900">3. 一键替换升级方法</div>
+          <p>在 GitHub 仓库中打开 <code>index.html</code> 和 <code>sitemap.xml</code>，点击右上角铅笔图标（Edit），将新版代码粘贴覆盖并点击 Commit changes 即可无缝升级。</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 核心数据与业务逻辑 -->
+  <!-- Core Application Logic -->
   <script>
     const HS_DATABASE = [
-      {
-        code: "8471.30",
-        name_cn: "便携式自动数据处理设备 (笔记本电脑/平板电脑 ≤10kg)",
-        name_en: "Laptops & Portable Automatic Data Processing Machines",
-        category: "电子与信息技术",
-        us_base: "Free (0.0%)",
-        us_sec301: "35.0%",
-        us_total: "35.0%",
-        us_val_rate: 0.35,
-        eu_rate: "0.0%",
-        eu_val_rate: 0.0,
-        uk_rate: "0.0%",
-        uk_val_rate: 0.0,
-        tips: "欧美通常给予IT信息技术协定(ITA)基准零关税，但出口美国受301附加税率严格管制，建议核查最新关税豁免清单。"
-      },
-      {
-        code: "8517.13",
-        name_cn: "智能手机 (蜂窝网络智能电话机)",
-        name_en: "Smartphones for Cellular Networks",
-        category: "电子与信息技术",
-        us_base: "Free (0.0%)",
-        us_sec301: "35.0%",
-        us_total: "35.0%",
-        us_val_rate: 0.35,
-        eu_rate: "0.0%",
-        eu_val_rate: 0.0,
-        uk_rate: "0.0%",
-        uk_val_rate: 0.0,
-        tips: "无线通讯类产品进欧美需具备 FCC / CE-RED 认证，关税层面受 301 附税影响较大。"
-      },
-      {
-        code: "8504.40",
-        name_cn: "静止式变流器 (开关电源/电源适配器/逆变器)",
-        name_en: "Static Converters (Power Adapters, Inverters)",
-        category: "电子与信息技术",
-        us_base: "Free (0.0%)",
-        us_sec301: "35.0%",
-        us_total: "35.0%",
-        us_val_rate: 0.35,
-        eu_rate: "0.0% - 2.1%",
-        eu_val_rate: 0.021,
-        uk_rate: "2.0%",
-        uk_val_rate: 0.02,
-        tips: "电源适配器属于高频通关品类，出运欧美需附带 UL / CE 认证报告及完整能效标准铭牌。"
-      },
-      {
-        code: "8544.42",
-        name_cn: "装有接插件的电导体 (USB数据线/连接线缆 ≤1000V)",
-        name_en: "Insulated Electric Cables Fitted with Connectors",
-        category: "电子与信息技术",
-        us_base: "2.6%",
-        us_sec301: "32.4%",
-        us_total: "35.0%",
-        us_val_rate: 0.35,
-        eu_rate: "3.3%",
-        eu_val_rate: 0.033,
-        uk_rate: "3.0%",
-        uk_val_rate: 0.03,
-        tips: "基准关税非零，合并301税率后综合清关税费较高，需精准核算到岸成本。"
-      },
-      {
-        code: "8534.00",
-        name_cn: "印制电路板 (单面/双面/多层硬质与柔性PCB板)",
-        name_en: "Printed Circuits (PCBs)",
-        category: "电子与信息技术",
-        us_base: "Free (0.0%)",
-        us_sec301: "25.0%",
-        us_total: "25.0%",
-        us_val_rate: 0.25,
-        eu_rate: "0.0%",
-        eu_val_rate: 0.0,
-        uk_rate: "0.0%",
-        uk_val_rate: 0.0,
-        tips: "电子制造核心元器件，大部分贸易国基准关税均为零，申报需注明层数及基材。"
-      },
-      {
-        code: "8507.60",
-        name_cn: "锂离子蓄电池 (储能电池/动力电池组/数码电芯)",
-        name_en: "Lithium-ion Batteries and Packs",
-        category: "电子与信息技术",
-        us_base: "3.4%",
-        us_sec301: "25.0%",
-        us_total: "28.4%",
-        us_val_rate: 0.284,
-        eu_rate: "2.7%",
-        eu_val_rate: 0.027,
-        uk_rate: "2.5%",
-        uk_val_rate: 0.025,
-        tips: "海关严格按危险品第9类监管，出运必须备齐 UN38.3 报告、MSDS 及危险品包装使用鉴定证书。"
-      },
-      {
-        code: "9403.60",
-        name_cn: "其他木质家具 (木餐桌/书柜/木制储物柜/边柜)",
-        name_en: "Other Wooden Furniture (Dining Tables, Cabinets)",
-        category: "家具与家居用品",
-        us_base: "Free - 2.5%",
-        us_sec301: "25.0%",
-        us_total: "25.0% - 27.5%",
-        us_val_rate: 0.25,
-        eu_rate: "2.7%",
-        eu_val_rate: 0.027,
-        uk_rate: "2.0%",
-        uk_val_rate: 0.02,
-        tips: "美国海关对木制卧房家具有极高的反倾销/反补贴(AD/CVD)税率，申报前必须明确材质与具体用途分类。"
-      },
-      {
-        code: "9401.61",
-        name_cn: "带软垫的木框架坐具 (软体木沙发/实木软包扶手椅)",
-        name_en: "Upholstered Seats with Wooden Frames (Sofas, Armchairs)",
-        category: "家具与家居用品",
-        us_base: "Free (0.0%)",
-        us_sec301: "25.0%",
-        us_total: "25.0%",
-        us_val_rate: 0.25,
-        eu_rate: "2.7%",
-        eu_val_rate: 0.027,
-        uk_rate: "2.0%",
-        uk_val_rate: 0.02,
-        tips: "大件家具海运大多按整柜走，装柜时需提前算准 CBM，防止体积超标产生爆仓亏舱费。"
-      },
-      {
-        code: "9403.20",
-        name_cn: "其他金属家具 (铁艺置物架/钢制工位桌/金属床架)",
-        name_en: "Other Metal Furniture (Steel Desks, Racks)",
-        category: "家具与家居用品",
-        us_base: "Free (0.0%)",
-        us_sec301: "25.0%",
-        us_total: "25.0%",
-        us_val_rate: 0.25,
-        eu_rate: "2.7%",
-        eu_val_rate: 0.027,
-        uk_rate: "2.0%",
-        uk_val_rate: 0.02,
-        tips: "欧美市场对金属家具基准税率友好，重点核验纸箱抗压跌落标准与防锈涂层环保标准。"
-      },
-      {
-        code: "6109.10",
-        name_cn: "棉制针织或钩编 T恤衫、汗衫及类似背心",
-        name_en: "T-shirts, Singlets and Other Vests of Cotton (Knitted)",
-        category: "纺织品与服装",
-        us_base: "16.5%",
-        us_sec301: "7.5%",
-        us_total: "24.0%",
-        us_val_rate: 0.24,
-        eu_rate: "12.0%",
-        eu_val_rate: 0.12,
-        uk_rate: "12.0%",
-        uk_val_rate: 0.12,
-        tips: "服装纺织品属于欧美贸易保护重点行业，基准税率较高。申报必须标清棉纤维含量百分比与男女款。"
-      },
-      {
-        code: "6110.20",
-        name_cn: "棉制套头衫、开襟衫、背心及类似品 (棉毛衫/卫衣)",
-        name_en: "Sweaters, Pullovers and Vests of Cotton",
-        category: "纺织品与服装",
-        us_base: "16.5%",
-        us_sec301: "7.5%",
-        us_total: "24.0%",
-        us_val_rate: 0.24,
-        eu_rate: "12.0%",
-        eu_val_rate: 0.12,
-        uk_rate: "12.0%",
-        uk_val_rate: 0.12,
-        tips: "需明确针织还是梭织，欧美对织物水洗标、成分标与原产地标有严格强制标识法规。"
-      },
-      {
-        code: "6203.42",
-        name_cn: "棉制男式长裤及马裤 (牛仔裤/休闲长裤)",
-        name_en: "Men's Cotton Trousers, Bib and Brace Overalls, Jeans",
-        category: "纺织品与服装",
-        us_base: "16.6%",
-        us_sec301: "7.5%",
-        us_total: "24.1%",
-        us_val_rate: 0.241,
-        eu_rate: "12.0%",
-        eu_val_rate: 0.12,
-        uk_rate: "12.0%",
-        uk_val_rate: 0.12,
-        tips: "梭织类重工水洗牛仔裤，申报时需注明是否经过破洞打磨、石磨及是否含弹性纤维。"
-      },
-      {
-        code: "8708.29",
-        name_cn: "车身其他未列名零部件 (汽车车门/车顶/保险杠配件)",
-        name_en: "Other Parts and Accessories of Motor Vehicle Bodies",
-        category: "机械与汽配",
-        us_base: "2.5%",
-        us_sec301: "25.0%",
-        us_total: "27.5%",
-        us_val_rate: 0.275,
-        eu_rate: "3.5% - 4.5%",
-        eu_val_rate: 0.045,
-        uk_rate: "4.0%",
-        uk_val_rate: 0.04,
-        tips: "汽配类产品进入欧美供应链，通常需要客户提供适用车型、原厂件号(OEM Part No.)及质量体系认定。"
-      },
-      {
-        code: "8418.10",
-        name_cn: "装有独立外门的冷藏-冷冻组合机 (家用双门及多门冰箱)",
-        name_en: "Combined Refrigerator-Freezers with Separate Doors",
-        category: "机械与汽配",
-        us_base: "Free (0.0%)",
-        us_sec301: "25.0%",
-        us_total: "25.0%",
-        us_val_rate: 0.25,
-        eu_rate: "1.9% - 2.2%",
-        eu_val_rate: 0.022,
-        uk_rate: "2.0%",
-        uk_val_rate: 0.02,
-        tips: "含氟制冷剂面临严格环保法规(如欧盟 F-Gas 配额与美国 EPA 认证)，出口报关需严格列明制冷工质型号。"
-      }
-    ];
+    {
+        "code": "8471.30",
+        "name_cn": "便携式自动数据处理设备 (笔记本电脑/平板电脑 ≤10kg)",
+        "name_en": "Laptops, Notebooks & Tablet Computers",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "35.0%",
+        "us_total": "35.0%",
+        "us_val_rate": 0.35,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "欧美给予IT信息技术协定(ITA)基准零关税，出口美国受301附加税率严格管制，建议核查最新豁免期。"
+    },
+    {
+        "code": "8517.13",
+        "name_cn": "智能手机 (5G/4G蜂窝网络智能电话机)",
+        "name_en": "Smartphones for Cellular Networks",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "35.0%",
+        "us_total": "35.0%",
+        "us_val_rate": 0.35,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "无线通讯设备进欧美需具备 FCC ID / CE-RED 认证，专利与射频合规为清关重点。"
+    },
+    {
+        "code": "8471.50",
+        "name_cn": "台式计算机与工业主机服务器 (自动数据处理部件)",
+        "name_en": "Desktop Computers, Processing Units & Cloud Servers",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "35.0%",
+        "us_total": "35.0%",
+        "us_val_rate": 0.35,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "整机服务器通关需提供电源能效 DOE 认证及电磁兼容测试报告。"
+    },
+    {
+        "code": "8473.30",
+        "name_cn": "计算机零配件 (独立显卡/电脑主板/内存条/机箱配件)",
+        "name_en": "Computer Parts & Accessories (GPUs, Motherboards, RAM)",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "高频电脑配件多享 ITA 零基准税率，301 关税是北美市场核心成本项。"
+    },
+    {
+        "code": "8504.40",
+        "name_cn": "静止式变流器 (开关电源/氮化镓充电器/电源适配器)",
+        "name_en": "Static Converters, GaN Fast Chargers & Power Adapters",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "35.0%",
+        "us_total": "35.0%",
+        "us_val_rate": 0.35,
+        "eu_rate": "2.1%",
+        "eu_val_rate": 0.021,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "电源类属于跨境电商爆品，出运欧美需附带 UL62368 / CE-LVD 认证及六级能效标识。"
+    },
+    {
+        "code": "8544.42",
+        "name_cn": "装有接插件的电导体 (Type-C数据线/HDMI高清线 ≤1000V)",
+        "name_en": "USB-C Data Cables, HDMI Cables Fitted with Connectors",
+        "category": "电子与信息技术",
+        "us_base": "2.6%",
+        "us_sec301": "32.4%",
+        "us_total": "35.0%",
+        "us_val_rate": 0.35,
+        "eu_rate": "3.3%",
+        "eu_val_rate": 0.033,
+        "uk_rate": "3.0%",
+        "uk_val_rate": 0.03,
+        "tips": "注意 HDMI 协会与 USB-IF 商标授权核查，海关严查侵权标贴。"
+    },
+    {
+        "code": "8534.00",
+        "name_cn": "印制电路板 (多层刚性PCB板/FPC柔性线路板)",
+        "name_en": "Printed Circuit Boards (Rigid & Flexible PCBs)",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "申报需明确层数、基材材质（FR-4/聚酰亚胺）及是否为未贴片裸板。"
+    },
+    {
+        "code": "8806.22",
+        "name_cn": "消费级航拍与行业植保无人机 (起飞重量 250g 至 7kg)",
+        "name_en": "Unmanned Aircraft, Camera Drones (250g to 7kg)",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "出口欧美需具备远程识别 (Remote ID) 合规认证及锂电池 UN38.3 航空运输报告。"
+    },
+    {
+        "code": "8525.89",
+        "name_cn": "网络安防监控摄像机与运动数码相机",
+        "name_en": "IP Security Surveillance Cameras & Action Cameras",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "出口美国需注意主控芯片是否涉及 NDAA 合规限制。"
+    },
+    {
+        "code": "8518.30",
+        "name_cn": "TWS真无线蓝牙耳机与头戴式降噪耳机",
+        "name_en": "TWS Wireless Bluetooth Earbuds & Noise-Cancelling Headphones",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "蓝牙耳机属 301 清单 4A 类，附加关税仅为 7.5%，但需注意蓝牙 BQB 认证与内置电池合规。"
+    },
+    {
+        "code": "8517.62",
+        "name_cn": "智能穿戴设备 (运动智能手表/心率手环/WiFi6路由器)",
+        "name_en": "Smartwatches, Fitness Trackers & WiFi Routers",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "智能手表与蓝牙穿戴设备享受 ITA 免基准税率，301 税率 7.5%，跨境卖家核心高利润类目。"
+    },
+    {
+        "code": "8528.52",
+        "name_cn": "液晶电脑显示器与电竞曲面显示屏",
+        "name_en": "LCD & LED Computer Monitors, Gaming Displays",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "单纯连接电脑使用的显示器免基准关税，若内置电视调谐器则按电视机高税率归类。"
+    },
+    {
+        "code": "8528.62",
+        "name_cn": "智能便携家用投影仪与激光超短焦投影机",
+        "name_en": "Smart Portable Projectors & Laser Home Theater Projectors",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "激光光源投影仪进美国必须提供 FDA 激光辐射安全报告 (Accession Number)。"
+    },
+    {
+        "code": "8471.60",
+        "name_cn": "机械键盘、无线游戏鼠标与手绘数位板",
+        "name_en": "Mechanical Keyboards, Wireless Gaming Mice & Graphic Tablets",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "电脑输入外设欧美全免基准关税，无线款需配备 2.4GHz 接收器 FCC/CE 认证。"
+    },
+    {
+        "code": "8523.51",
+        "name_cn": "固态硬盘 (NVMe SSD)、高速U盘与存储卡",
+        "name_en": "Solid-State Drives (SSD), USB Flash Drives & SD Cards",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "半导体固态存储介质全免基准关税，体积小货值高，适合空运快递专线。"
+    },
+    {
+        "code": "8443.32",
+        "name_cn": "桌面级3D打印机、激光打印机与条码热敏打印机",
+        "name_en": "3D Printers, Thermal Label Printers & Laser Printers",
+        "category": "电子与信息技术",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "跨境电商热敏面单打印机与消费级 3D 打印机在欧美均免基准关税。"
+    },
+    {
+        "code": "8541.43",
+        "name_cn": "光伏太阳能电池板组件 (单晶硅双面太阳能光伏板)",
+        "name_en": "Photovoltaic Solar Panels & Monocrystalline Modules",
+        "category": "新能源与光伏",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "50.0%",
+        "us_total": "50.0%",
+        "us_val_rate": 0.5,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "美国对光伏组件征收 50% 301关税及 201 保障措施税；欧洲与拉美中东市场零关税需求旺盛。"
+    },
+    {
+        "code": "8507.60",
+        "name_cn": "锂离子蓄电池 (磷酸铁锂储能电池柜/户外便携移动电源)",
+        "name_en": "LiFePO4 Energy Storage Batteries & Portable Power Stations",
+        "category": "新能源与光伏",
+        "us_base": "3.4%",
+        "us_sec301": "25.0%",
+        "us_total": "28.4%",
+        "us_val_rate": 0.284,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.5%",
+        "uk_val_rate": 0.025,
+        "tips": "2026年起美国对非车用储能锂电池 301 关税调整至 25%，海运必须提供第9类危包证与 UN38.3。"
+    },
+    {
+        "code": "8504.40.95",
+        "name_cn": "光储充一体并网逆变器与离网光伏控制器",
+        "name_en": "Hybrid Solar Inverters & MPPT Charge Controllers",
+        "category": "新能源与光伏",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "出口欧洲需满足各国并网代码认证（如德国 VDE-AR-N 4105、英国 G98/G99）。"
+    },
+    {
+        "code": "8537.10",
+        "name_cn": "新能源汽车直流快充桩与家用交流壁挂充电盒",
+        "name_en": "EV Fast Charging Stations & AC Wallbox Chargers",
+        "category": "新能源与光伏",
+        "us_base": "2.7%",
+        "us_sec301": "25.0%",
+        "us_total": "27.7%",
+        "us_val_rate": 0.277,
+        "eu_rate": "2.1%",
+        "eu_val_rate": 0.021,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "带智能计量控制屏的充电桩按控制柜或变流器归类，需具备美标 NACS 或欧标 Type 2 认证。"
+    },
+    {
+        "code": "8419.12",
+        "name_cn": "太阳能真空管热水器与空气源热泵采暖机组",
+        "name_en": "Solar Water Heaters & Air-Source Heat Pumps",
+        "category": "新能源与光伏",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "2.6%",
+        "eu_val_rate": 0.026,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "欧洲能源转型重点补贴产品，R290 环保冷媒热泵在欧盟享有政府安装补贴。"
+    },
+    {
+        "code": "8502.31",
+        "name_cn": "中小型风力发电机组与风光互补离网发电系统",
+        "name_en": "Wind-Powered Generating Sets & Small Wind Turbines",
+        "category": "新能源与光伏",
+        "us_base": "2.5%",
+        "us_sec301": "25.0%",
+        "us_total": "27.5%",
+        "us_val_rate": 0.275,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "申报需明确额定发电功率(kW)、叶片直径及是否配套逆变控制柜。"
+    },
+    {
+        "code": "8501.32",
+        "name_cn": "光伏追踪支架伺服电机与直流无刷电机 (>750W且≤75kW)",
+        "name_en": "DC Brushless Motors for Solar Trackers & EVs",
+        "category": "新能源与光伏",
+        "us_base": "2.8%",
+        "us_sec301": "25.0%",
+        "us_total": "27.8%",
+        "us_val_rate": 0.278,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "申报需注明额定电压、转速及是否内置控制器。"
+    },
+    {
+        "code": "8458.11",
+        "name_cn": "数控金属切削卧式车床与车铣复合加工中心",
+        "name_en": "CNC Horizontal Metal Lathes & Turning Centers",
+        "category": "机械与汽配",
+        "us_base": "4.4%",
+        "us_sec301": "25.0%",
+        "us_total": "29.4%",
+        "us_val_rate": 0.294,
+        "eu_rate": "1.7%",
+        "eu_val_rate": 0.017,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "出口高精度数控机床需办理两用物项出口许可证审核，如实申报定位精度。"
+    },
+    {
+        "code": "8456.11",
+        "name_cn": "光纤激光切割机、手持激光焊接机与打标机",
+        "name_en": "Fiber Laser Cutting, Welding & Marking Machines",
+        "category": "机械与汽配",
+        "us_base": "2.4%",
+        "us_sec301": "25.0%",
+        "us_total": "27.4%",
+        "us_val_rate": 0.274,
+        "eu_rate": "2.2%",
+        "eu_val_rate": 0.022,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "进入美国市场必须在清关时提交 FDA Form 2877 激光产品辐射安全申报表。"
+    },
+    {
+        "code": "8429.52",
+        "name_cn": "360度全回转履带式液压挖掘机与小型微挖",
+        "name_en": "Mini Excavators & 360-Degree Revolving Hydraulic Shovels",
+        "category": "机械与汽配",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "国产 1~3 吨小型微挖在欧美农场极受欢迎，柴油发动机必须具备美国 EPA Tier 4 或欧盟 Stage V 排放认证！"
+    },
+    {
+        "code": "8427.10",
+        "name_cn": "电动仓储叉车、锂电托盘搬运车与堆高车",
+        "name_en": "Electric Forklift Trucks & Powered Pallet Stackers",
+        "category": "机械与汽配",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "4.5%",
+        "eu_val_rate": 0.045,
+        "uk_rate": "4.0%",
+        "uk_val_rate": 0.04,
+        "tips": "注意欧盟对中国手动液压托盘搬运车有高额反倾销税，电动锂电款需区分海关子目。"
+    },
+    {
+        "code": "8477.10",
+        "name_cn": "全自动伺服节能塑料注塑成型机与吹瓶机",
+        "name_en": "Plastic Injection Molding & Blow Molding Machines",
+        "category": "机械与汽配",
+        "us_base": "3.1%",
+        "us_sec301": "25.0%",
+        "us_total": "28.1%",
+        "us_val_rate": 0.281,
+        "eu_rate": "1.7%",
+        "eu_val_rate": 0.017,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "重型整机出口常采用分体装柜，报关需按整机归类并附带装箱功能清单。"
+    },
+    {
+        "code": "8422.30",
+        "name_cn": "全自动液体灌装机、贴标机与食品真空包装机",
+        "name_en": "Automatic Filling, Sealing, Labeling & Packaging Machines",
+        "category": "机械与汽配",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "1.7%",
+        "eu_val_rate": 0.017,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "接触食品级包装机械需提供不锈钢 304/316 材质证明及 CE 机械安全指令认证。"
+    },
+    {
+        "code": "8482.10",
+        "name_cn": "精密深沟球轴承、圆锥滚子轴承与直线导轨轴承",
+        "name_en": "Deep Groove Ball Bearings & Roller Bearings",
+        "category": "机械与汽配",
+        "us_base": "9.0%",
+        "us_sec301": "25.0%",
+        "us_total": "34.0%",
+        "us_val_rate": 0.34,
+        "eu_rate": "8.0%",
+        "eu_val_rate": 0.08,
+        "uk_rate": "8.0%",
+        "uk_val_rate": 0.08,
+        "tips": "美国对华圆锥滚子轴承及球轴承设有历史反倾销令，出口前需由清关行确认是否在双反范围内。"
+    },
+    {
+        "code": "8481.80",
+        "name_cn": "不锈钢工业球阀、蝶阀、止回阀与卫浴水龙头",
+        "name_en": "Industrial Stainless Steel Valves, Ball Valves & Faucets",
+        "category": "机械与汽配",
+        "us_base": "5.6%",
+        "us_sec301": "25.0%",
+        "us_total": "30.6%",
+        "us_val_rate": 0.306,
+        "eu_rate": "2.2%",
+        "eu_val_rate": 0.022,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "工业承压阀门出运欧盟需办理 PED（承压设备指令）CE 认证。"
+    },
+    {
+        "code": "7318.15",
+        "name_cn": "高强度合金钢螺栓、六角螺母与不锈钢紧固件",
+        "name_en": "Steel Bolts, Screws, Nuts & Industrial Fasteners",
+        "category": "机械与汽配",
+        "us_base": "Free - 6.2%",
+        "us_sec301": "25.0%",
+        "us_total": "25.0% - 31.2%",
+        "us_val_rate": 0.28,
+        "eu_rate": "3.7%",
+        "eu_val_rate": 0.037,
+        "uk_rate": "3.5%",
+        "uk_val_rate": 0.035,
+        "tips": "欧盟对中国钢铁紧固件重新征收高达 22.1%~86.5% 的反倾销税，出口欧洲务必高度警惕！"
+    },
+    {
+        "code": "8711.60",
+        "name_cn": "锂电助力电动自行车 (E-Bike)、胖胎越野电单车与滑板车",
+        "name_en": "Electric Bicycles (E-Bikes), Fat-Tire E-Bikes & Scooters",
+        "category": "机械与汽配",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "6.0%",
+        "eu_val_rate": 0.06,
+        "uk_rate": "6.0%",
+        "uk_val_rate": 0.06,
+        "tips": "出口美国需强制通过 UL 2849 整车电气系统防起火认证；欧盟有高额双反税。"
+    },
+    {
+        "code": "8708.29",
+        "name_cn": "汽车车身冲压件、改装前后保险杠与碳纤维尾翼配件",
+        "name_en": "Auto Body Parts, Bumpers, Grilles & Carbon Fiber Spoilers",
+        "category": "机械与汽配",
+        "us_base": "2.5%",
+        "us_sec301": "25.0%",
+        "us_total": "27.5%",
+        "us_val_rate": 0.275,
+        "eu_rate": "4.5%",
+        "eu_val_rate": 0.045,
+        "uk_rate": "4.0%",
+        "uk_val_rate": 0.04,
+        "tips": "汽车外观改装件出口需规避原厂车标 LOGO 侵权风险。"
+    },
+    {
+        "code": "8708.30",
+        "name_cn": "汽车陶瓷刹车片、通风制动盘与液压制动卡钳",
+        "name_en": "Automotive Ceramic Brake Pads, Rotors & Calipers",
+        "category": "机械与汽配",
+        "us_base": "2.5%",
+        "us_sec301": "25.0%",
+        "us_total": "27.5%",
+        "us_val_rate": 0.275,
+        "eu_rate": "3.0%",
+        "eu_val_rate": 0.03,
+        "uk_rate": "3.0%",
+        "uk_val_rate": 0.03,
+        "tips": "欧洲市场强制要求 ECE R90 认证钢印，北美市场关注无铜环保配方法规。"
+    },
+    {
+        "code": "8708.80",
+        "name_cn": "汽车悬挂减震器、空气悬架气囊与控制臂摆臂",
+        "name_en": "Automotive Suspension Shock Absorbers, Struts & Control Arms",
+        "category": "机械与汽配",
+        "us_base": "2.5%",
+        "us_sec301": "25.0%",
+        "us_total": "27.5%",
+        "us_val_rate": 0.275,
+        "eu_rate": "3.5%",
+        "eu_val_rate": 0.035,
+        "uk_rate": "3.0%",
+        "uk_val_rate": 0.03,
+        "tips": "售后维修市场(Aftermarket)高频耗材，申报需列明适用车型与 OE 替换号。"
+    },
+    {
+        "code": "8708.70",
+        "name_cn": "汽车锻造铝合金轮毂与越野钢圈配件",
+        "name_en": "Forged Aluminum Alloy Road Wheels & Rims",
+        "category": "机械与汽配",
+        "us_base": "2.5%",
+        "us_sec301": "25.0%",
+        "us_total": "27.5%",
+        "us_val_rate": 0.275,
+        "eu_rate": "3.0%",
+        "eu_val_rate": 0.03,
+        "uk_rate": "3.0%",
+        "uk_val_rate": 0.03,
+        "tips": "欧美对铝合金轮毂设有长期双反调查令，出运前需严格核实工厂双反编码。"
+    },
+    {
+        "code": "4011.10",
+        "name_cn": "小客车用充气子午线橡胶新轮胎与越野雪地胎",
+        "name_en": "New Pneumatic Radial Rubber Tires for Passenger Cars",
+        "category": "机械与汽配",
+        "us_base": "4.0%",
+        "us_sec301": "25.0%",
+        "us_total": "29.0%",
+        "us_val_rate": 0.29,
+        "eu_rate": "4.5%",
+        "eu_val_rate": 0.045,
+        "uk_rate": "4.5%",
+        "uk_val_rate": 0.045,
+        "tips": "轮胎进美国需具备 DOT 认证编码，进欧盟需粘贴燃油效率与湿地抓地力标签。"
+    },
+    {
+        "code": "8512.20",
+        "name_cn": "汽车LED前大灯总成、贯穿式尾灯与越野长条工作灯",
+        "name_en": "Automotive LED Headlights, Taillights & Off-Road Light Bars",
+        "category": "机械与汽配",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "车灯出口美国需具备 DOT/SAE 认证标识，出口欧洲需具备 E-Mark 认证标识。"
+    },
+    {
+        "code": "8467.21",
+        "name_cn": "无刷锂电手电钻、冲击扳手、角磨机与电动工具套装",
+        "name_en": "Cordless Brushless Electric Drills, Impact Wrenches & Angle Grinders",
+        "category": "机械与汽配",
+        "us_base": "1.8%",
+        "us_sec301": "25.0%",
+        "us_total": "26.8%",
+        "us_val_rate": 0.268,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "永康/南通电动工具出口拳头产品，带锂电池包出运必须提供 UN38.3 及海运危包证。"
+    },
+    {
+        "code": "8433.11",
+        "name_cn": "智能割草机器人、锂电手推割草机与园林修枝机",
+        "name_en": "Robotic Lawn Mowers, Cordless Walk-Behind Mowers & Hedge Trimmers",
+        "category": "机械与汽配",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "欧美独立院落刚需高客单爆品，欧美进口基准关税均为 0%，无边界激光视觉割草机器人利润极高！"
+    },
+    {
+        "code": "7610.90",
+        "name_cn": "工业铝型材框架、光伏铝合金支架与断桥铝门窗型材",
+        "name_en": "Aluminum Profiles, Solar Mounting Brackets & Window Frames",
+        "category": "机械与汽配",
+        "us_base": "5.7%",
+        "us_sec301": "25.0%",
+        "us_total": "30.7%",
+        "us_val_rate": 0.307,
+        "eu_rate": "6.0%",
+        "eu_val_rate": 0.06,
+        "uk_rate": "6.0%",
+        "uk_val_rate": 0.06,
+        "tips": "铝制品出口美国除常规税外，还需核查 232 条款铝关税及挤压铝型材反倾销调查；出口欧盟需申报 CBAM 碳边境税数据！"
+    },
+    {
+        "code": "8418.10",
+        "name_cn": "装有独立外门的冷藏-冷冻组合机 (家用双门及多门冰箱)",
+        "name_en": "Combined Refrigerator-Freezers with Separate Doors",
+        "category": "机械与汽配",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "2.2%",
+        "eu_val_rate": 0.022,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "含氟制冷剂面临严格环保法规(如欧盟 F-Gas 配额与美国 EPA 认证)，出口报关需严格列明制冷工质型号。"
+    },
+    {
+        "code": "9403.60",
+        "name_cn": "实木与板式木质家具 (岩板木餐桌/电视柜/定制衣柜)",
+        "name_en": "Wooden Dining Tables, Living Room Cabinets & Wardrobes",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "木制品进美国必须提交雷斯法案 (Lacey Act) 植物木材合法来源申报单及熏蒸证明。"
+    },
+    {
+        "code": "9401.61",
+        "name_cn": "真皮与科技布软包沙发、功能太空舱单人沙发椅",
+        "name_en": "Upholstered Fabric & Leather Sofas, Recliner Armchairs",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "软体家具出口英国与美国加州需符合阻燃防火测试标准 (UK FR / CA TB117)。"
+    },
+    {
+        "code": "9401.31",
+        "name_cn": "人体工学网布办公转椅与电竞游戏升降椅",
+        "name_en": "Ergonomic Mesh Office Swivel Chairs & Gaming Chairs",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "办公升降椅核心部件气压棒必须通过 BIFMA / SGS 三级或四级防爆安全认证。"
+    },
+    {
+        "code": "9403.20",
+        "name_cn": "双电机电动升降办公桌架、重型仓储货架与户外铝制家具",
+        "name_en": "Electric Standing Desks, Metal Storage Racks & Patio Furniture",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "电动升降桌是欧美居家办公常青爆款，需提供电机 UL962 认证。"
+    },
+    {
+        "code": "9405.42",
+        "name_cn": "LED智能吸顶灯、太阳能户外庭院投光灯与植物生长灯",
+        "name_en": "LED Ceiling Lights, Solar Outdoor Floodlights & Grow Lights",
+        "category": "家具与家居用品",
+        "us_base": "6.0%",
+        "us_sec301": "25.0%",
+        "us_total": "31.0%",
+        "us_val_rate": 0.31,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "植物生长灯及商业工矿灯在北美申请 DLC 认证可帮助当地买家申领电力公司高额返现补贴。"
+    },
+    {
+        "code": "9405.11",
+        "name_cn": "现代水晶吊灯、北欧装饰壁灯与风扇吊灯",
+        "name_en": "Chandeliers, Pendant Lights & Ceiling Fan Light Fixtures",
+        "category": "家具与家居用品",
+        "us_base": "3.9%",
+        "us_sec301": "25.0%",
+        "us_total": "28.9%",
+        "us_val_rate": 0.289,
+        "eu_rate": "3.7%",
+        "eu_val_rate": 0.037,
+        "uk_rate": "3.0%",
+        "uk_val_rate": 0.03,
+        "tips": "隐形风扇吊灯在北美与东南亚极畅销，需核查是按吊扇(8414.51)还是灯具(9405.11)归类。"
+    },
+    {
+        "code": "9404.21",
+        "name_cn": "真空压缩卷包记忆棉床垫与天然乳胶床垫",
+        "name_en": "Memory Foam & Latex Mattresses in a Box",
+        "category": "家具与家居用品",
+        "us_base": "3.0%",
+        "us_sec301": "25.0%",
+        "us_total": "28.0%",
+        "us_val_rate": 0.28,
+        "eu_rate": "3.7%",
+        "eu_val_rate": 0.037,
+        "uk_rate": "3.5%",
+        "uk_val_rate": 0.035,
+        "tips": "床垫出口美国受极高反倾销税监管，出口欧洲与澳洲中东则仅按常规低关税清关。"
+    },
+    {
+        "code": "6907.21",
+        "name_cn": "全抛釉大板瓷砖、防滑木纹砖与岩板背景墙",
+        "name_en": "Glazed Porcelain Tiles & Sintered Stone Slabs",
+        "category": "家具与家居用品",
+        "us_base": "8.5%",
+        "us_sec301": "25.0%",
+        "us_total": "33.5%",
+        "us_val_rate": 0.335,
+        "eu_rate": "5.0%",
+        "eu_val_rate": 0.05,
+        "uk_rate": "5.0%",
+        "uk_val_rate": 0.05,
+        "tips": "建陶卫浴大宗出口东南亚、中东及俄罗斯市场增长迅猛，海运需注意重柜限重规则。"
+    },
+    {
+        "code": "8508.11",
+        "name_cn": "激光导航扫地机器人、洗地机与无线手持吸尘器",
+        "name_en": "Robot Vacuum Cleaners, Wet-Dry Floor Washers & Cordless Vacuums",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "1.7%",
+        "eu_val_rate": 0.017,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "智能清洁家电出海龙头品类，内置锂电池与激光雷达需同时满足危包海运与激光安全标准。"
+    },
+    {
+        "code": "8516.60",
+        "name_cn": "多功能空气炸锅、电磁炉与嵌入式电烤箱",
+        "name_en": "Air Fryers, Induction Cooktops & Electric Ovens",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "厨房发热小家电内胆不粘涂层必须通过美国 FDA 或欧盟 LFGB 食品接触级安全检测（不含PFOA/PFAS）。"
+    },
+    {
+        "code": "8516.71",
+        "name_cn": "半自动意式浓缩咖啡机与全自动现磨咖啡机",
+        "name_en": "Espresso Coffee Makers & Automatic Drip Coffee Machines",
+        "category": "家具与家居用品",
+        "us_base": "3.4%",
+        "us_sec301": "7.5%",
+        "us_total": "10.9%",
+        "us_val_rate": 0.109,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "家用电热咖啡机属于 301 清单 4A 低税率梯队（仅加征 7.5%），欧美市场利润空间极佳。"
+    },
+    {
+        "code": "7323.93",
+        "name_cn": "不锈钢保温杯、车载冰霸杯与厨房不锈钢汤锅餐具",
+        "name_en": "Stainless Steel Insulated Tumblers, Vacuum Flasks & Cookware",
+        "category": "家具与家居用品",
+        "us_base": "2.0%",
+        "us_sec301": "7.5%",
+        "us_total": "9.5%",
+        "us_val_rate": 0.095,
+        "eu_rate": "3.2%",
+        "eu_val_rate": 0.032,
+        "uk_rate": "3.0%",
+        "uk_val_rate": 0.03,
+        "tips": "双层抽真空保温杯通常归入 9617.00（综合税率 16.5%），非真空单层杯归 7323.93，报关需区分清楚。"
+    },
+    {
+        "code": "3924.10",
+        "name_cn": "食品级硅胶餐具、塑料保鲜盒与厨房收纳用品",
+        "name_en": "Plastic & Silicone Tableware, Kitchen Storage Containers",
+        "category": "家具与家居用品",
+        "us_base": "3.4%",
+        "us_sec301": "7.5%",
+        "us_total": "10.9%",
+        "us_val_rate": 0.109,
+        "eu_rate": "6.5%",
+        "eu_val_rate": 0.065,
+        "uk_rate": "6.0%",
+        "uk_val_rate": 0.06,
+        "tips": "注意欧盟对含有竹粉或植物纤维的密胺塑料餐具实施严苛的边境逐批查验。"
+    },
+    {
+        "code": "9406.90",
+        "name_cn": "太空舱移动民宿房、折叠集装箱房屋与户外铝合金阳光房",
+        "name_en": "Prefabricated Capsule Houses, Expandable Container Homes & Pergolas",
+        "category": "家具与家居用品",
+        "us_base": "2.9%",
+        "us_sec301": "25.0%",
+        "us_total": "27.9%",
+        "us_val_rate": 0.279,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "装配式建筑与太空舱房屋近年在欧美澳及中东景区爆火，需提前对接目的港建筑结构抗风雪荷载规范。"
+    },
+    {
+        "code": "8415.10",
+        "name_cn": "分体式变频冷暖壁挂空调与移动便携式空调",
+        "name_en": "Split Inverter Air Conditioners & Portable AC Units",
+        "category": "家具与家居用品",
+        "us_base": "2.2%",
+        "us_sec301": "25.0%",
+        "us_total": "27.2%",
+        "us_val_rate": 0.272,
+        "eu_rate": "2.2%",
+        "eu_val_rate": 0.022,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "出口美国需具备能源之星 (Energy Star) 与 AHRI 能效认证，R32/R454B 新冷媒需符合环保配额。"
+    },
+    {
+        "code": "8301.40",
+        "name_cn": "指纹密码智能门锁、蓝牙挂锁与家用机械防盗锁",
+        "name_en": "Smart Fingerprint Door Locks, Bluetooth Padlocks & Deadbolts",
+        "category": "家具与家居用品",
+        "us_base": "5.7%",
+        "us_sec301": "25.0%",
+        "us_total": "30.7%",
+        "us_val_rate": 0.307,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "北美公寓与民宿改造高频采购品，需符合 ANSI/BHMA 等级测试标准。"
+    },
+    {
+        "code": "9505.10",
+        "name_cn": "圣诞节装饰品、仿真圣诞树、节日彩灯串与万圣节派对用品",
+        "name_en": "Christmas Decorations, Artificial Christmas Trees & Festive Articles",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "0.0%",
+        "us_total": "0.0%",
+        "us_val_rate": 0.0,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "重要免税政策：圣诞节节日用品 (9505.10) 在美国不仅免基准税，且未列入 301 加征清单，综合关税 0%！"
+    },
+    {
+        "code": "4819.10",
+        "name_cn": "定制瓦楞纸箱、飞机盒、彩印礼盒与牛皮纸包装袋",
+        "name_en": "Corrugated Paper Cartons, Custom Printed Gift Boxes & Paper Bags",
+        "category": "家具与家居用品",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "欧盟与英国对纸质包装盒实行 0% 零关税且倡导 FSC 森林环保认证以替代塑料包装。"
+    },
+    {
+        "code": "6109.10",
+        "name_cn": "重磅纯棉针织T恤衫、文化衫与落肩卫衣背心",
+        "name_en": "100% Cotton Knitted T-Shirts, Singlets & Tank Tops",
+        "category": "纺织品与服装",
+        "us_base": "16.5%",
+        "us_sec301": "7.5%",
+        "us_total": "24.0%",
+        "us_val_rate": 0.24,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "棉制服装出口美国需备齐棉花原产地溯源合规文件（纱线及面料采购合同发票）。"
+    },
+    {
+        "code": "6104.63",
+        "name_cn": "锦纶氨纶高弹瑜伽裤、运动健身紧身裤与骑行裤",
+        "name_en": "Women's Synthetic Fiber Yoga Pants, Leggings & Activewear",
+        "category": "纺织品与服装",
+        "us_base": "28.2%",
+        "us_sec301": "7.5%",
+        "us_total": "35.7%",
+        "us_val_rate": 0.357,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "化纤针织女裤在美国的 MFN 基准税率高达 28.2%，独立站卖家定价时务必将高关税计入成本。"
+    },
+    {
+        "code": "6110.20",
+        "name_cn": "棉制连帽卫衣、开衫毛衣与抓绒套头衫",
+        "name_en": "Cotton Hoodies, Sweatshirts, Pullovers & Cardigans",
+        "category": "纺织品与服装",
+        "us_base": "16.5%",
+        "us_sec301": "7.5%",
+        "us_total": "24.0%",
+        "us_val_rate": 0.24,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "欧美服装强检水洗护理标签、纤维成分百分比与原产国永久性缝标。"
+    },
+    {
+        "code": "6203.42",
+        "name_cn": "男式水洗弹力牛仔裤、工装多袋长裤与休闲短裤",
+        "name_en": "Men's Denim Jeans, Cotton Cargo Pants & Shorts",
+        "category": "纺织品与服装",
+        "us_base": "16.6%",
+        "us_sec301": "7.5%",
+        "us_total": "24.1%",
+        "us_val_rate": 0.241,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "梭织牛仔服装需注意偶氮染料 (AZO Free) 环保标准检测。"
+    },
+    {
+        "code": "6201.40",
+        "name_cn": "户外防风防水冲锋衣、白鸭绒羽绒服与滑雪棉服",
+        "name_en": "Outdoor Waterproof Jackets, Down Coats & Ski Parkas",
+        "category": "纺织品与服装",
+        "us_base": "7.1%",
+        "us_sec301": "7.5%",
+        "us_total": "14.6%",
+        "us_val_rate": 0.146,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "关键节税技巧：符合美国海关防水测试标准的雨衣/防水冲锋衣可归入低税率子目(4.4%~7.1%)，大幅节省关税！"
+    },
+    {
+        "code": "6112.41",
+        "name_cn": "女式连体泳衣、比基尼分体泳装与冲浪防晒服",
+        "name_en": "Women's Synthetic Knitted Swimwear, Bikinis & Rash Guards",
+        "category": "纺织品与服装",
+        "us_base": "24.9%",
+        "us_sec301": "7.5%",
+        "us_total": "32.4%",
+        "us_val_rate": 0.324,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "跨境快时尚高毛利品类，需注意色牢度与耐海水耐氯漂测试标准。"
+    },
+    {
+        "code": "4202.12",
+        "name_cn": "PC/ABS万向轮登机拉杆箱、双肩电脑背包与手提包",
+        "name_en": "Hardside Spinner Luggage, Suitcases, Backpacks & Handbags",
+        "category": "纺织品与服装",
+        "us_base": "20.0%",
+        "us_sec301": "25.0%",
+        "us_total": "45.0%",
+        "us_val_rate": 0.45,
+        "eu_rate": "9.7%",
+        "eu_val_rate": 0.097,
+        "uk_rate": "8.0%",
+        "uk_val_rate": 0.08,
+        "tips": "箱包属 301 清单 25% 档位，叠加高基准税后美国综合关税超 40%，欧洲市场税率(3.7%~9.7%)更具优势。"
+    },
+    {
+        "code": "6404.11",
+        "name_cn": "透气网面跑步运动鞋、气垫篮球鞋与板鞋",
+        "name_en": "Athletic Running Shoes, Sneakers & Sports Footwear",
+        "category": "纺织品与服装",
+        "us_base": "20.0%",
+        "us_sec301": "7.5%",
+        "us_total": "27.5%",
+        "us_val_rate": 0.275,
+        "eu_rate": "16.9%",
+        "eu_val_rate": 0.169,
+        "uk_rate": "16.0%",
+        "uk_val_rate": 0.16,
+        "tips": "美国海关鞋类按单双 FOB 申报价格分档计税（大于$12/双通常为20%基准税+7.5%附税）。"
+    },
+    {
+        "code": "6402.99",
+        "name_cn": "EVA踩屎感居家拖鞋、洞洞鞋与防滑凉鞋",
+        "name_en": "EVA Foam Slides, Clogs, Sandals & Slippers",
+        "category": "纺织品与服装",
+        "us_base": "6.0%",
+        "us_sec301": "7.5%",
+        "us_total": "13.5%",
+        "us_val_rate": 0.135,
+        "eu_rate": "17.0%",
+        "eu_val_rate": 0.17,
+        "uk_rate": "16.0%",
+        "uk_val_rate": 0.16,
+        "tips": "鞋面90%以上为橡胶或塑料的一体成型 EVA 拖鞋在美国仅收 6% 基准税，是夏季跨境爆单王。"
+    },
+    {
+        "code": "6302.31",
+        "name_cn": "高支长绒棉酒店床上四件套、天丝被套与床单",
+        "name_en": "Cotton Bed Linen, Duvet Covers, Pillowcases & Sheet Sets",
+        "category": "纺织品与服装",
+        "us_base": "6.7%",
+        "us_sec301": "7.5%",
+        "us_total": "14.2%",
+        "us_val_rate": 0.142,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "含有刺绣、蕾丝花边或印花的棉制床品在美国适用不同子目税率，报关需注明工艺。"
+    },
+    {
+        "code": "6306.22",
+        "name_cn": "户外自动充气露营帐篷、车顶帐篷与天幕遮阳棚",
+        "name_en": "Outdoor Camping Tents, Rooftop Tents & Sun Shelters (Synthetic)",
+        "category": "纺织品与服装",
+        "us_base": "8.8%",
+        "us_sec301": "7.5%",
+        "us_total": "16.3%",
+        "us_val_rate": 0.163,
+        "eu_rate": "12.0%",
+        "eu_val_rate": 0.12,
+        "uk_rate": "12.0%",
+        "uk_val_rate": 0.12,
+        "tips": "硬壳铝合金车顶帐篷在欧美越野圈售价高达 $1500-$3000，属于高客单大件出海黄金单品。"
+    },
+    {
+        "code": "7117.19",
+        "name_cn": "钛钢镀金时尚首饰、莫桑石戒指、项链耳环与仿真饰品",
+        "name_en": "Imitation Jewelry, Stainless Steel Gold-Plated Necklaces & Rings",
+        "category": "纺织品与服装",
+        "us_base": "11.0%",
+        "us_sec301": "7.5%",
+        "us_total": "18.5%",
+        "us_val_rate": 0.185,
+        "eu_rate": "4.0%",
+        "eu_val_rate": 0.04,
+        "uk_rate": "4.0%",
+        "uk_val_rate": 0.04,
+        "tips": "义乌/东莞仿真饰品出海核心类目，欧美海关重点抽检铅、镉、镍释放量是否符合 REACH / 加州65法案。"
+    },
+    {
+        "code": "9018.90",
+        "name_cn": "一次性医用耗材、家用电子血压计与心电监测仪",
+        "name_en": "Medical Instruments, Digital Blood Pressure Monitors & Consumables",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "进美国必须具备 FDA 企业注册号与产品 Listing，二类器械需 510(k) 批文。"
+    },
+    {
+        "code": "9018.12",
+        "name_cn": "医用便携式B超机与彩色多普勒超声诊断仪",
+        "name_en": "Ultrasonic Scanning Diagnostic Apparatus (Handheld Ultrasound)",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "医疗影像设备在欧美基准税率为 0%，掌上无线超声探头近年海外诊所采购量极大。"
+    },
+    {
+        "code": "9021.40",
+        "name_cn": "无线蓝牙数字助听器与辅听器设备",
+        "name_en": "Digital Hearing Aids & OTC Sound Amplifiers",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "0.0%",
+        "us_total": "0.0%",
+        "us_val_rate": 0.0,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "黄金免税赛道！助听器属于人道医疗保障产品，欧美基准关税与美国 301 关税全部为 0%（需符合美国 OTC 助听器 FDA 规范）！"
+    },
+    {
+        "code": "8713.90",
+        "name_cn": "轻量化碳纤维电动轮椅与老年医疗代步车",
+        "name_en": "Electric Wheelchairs & Mobility Scooters for Disabled",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "0.0%",
+        "us_total": "0.0%",
+        "us_val_rate": 0.0,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "专为残障人士设计的电动轮椅在全球绝大多数国家享受人道主义零关税优待！"
+    },
+    {
+        "code": "8543.70",
+        "name_cn": "冰点激光脱毛仪、红光LED美容面罩与射频美容仪",
+        "name_en": "IPL Hair Removal Handsets, LED Therapy Masks & RF Beauty Devices",
+        "category": "医疗与个护",
+        "us_base": "2.6%",
+        "us_sec301": "25.0%",
+        "us_total": "27.6%",
+        "us_val_rate": 0.276,
+        "eu_rate": "2.2%",
+        "eu_val_rate": 0.022,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "DTC 独立站高毛利王牌品类，进美国需办理 FDA 510(k) 医疗美容认证。"
+    },
+    {
+        "code": "8510.10",
+        "name_cn": "电动往复式剃须刀、理发器电推剪与鼻毛修剪器",
+        "name_en": "Electric Shavers, Hair Clippers & Trimmers",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "2.2%",
+        "eu_val_rate": 0.022,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "电动剃须刀美国免基准税且 301 附税仅 7.5%，综合税负低，中东与欧美销量极大。"
+    },
+    {
+        "code": "9019.10",
+        "name_cn": "深层肌肉筋膜枪、眼部热敷按摩仪与电动按摩椅",
+        "name_en": "Percussion Massage Guns, Eye Massagers & Massage Chairs",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "按摩器具欧美基准关税全免（0%），注意不要在说明书中夸大治疗疾病的医疗功效以免触发 FDA 扣货。"
+    },
+    {
+        "code": "6704.11",
+        "name_cn": "真人发蕾丝头套假发、化纤编织发帘与接发片",
+        "name_en": "Human Hair Lace Front Wigs, Synthetic Braiding Hair & Extensions",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "0.0%",
+        "us_total": "0.0%",
+        "us_val_rate": 0.0,
+        "eu_rate": "2.2%",
+        "eu_val_rate": 0.022,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "许昌/青岛假发出海暴利类目！真人发制品(6704.20)在美国享受零基准税及 301 排除待遇，空运小包极佳。"
+    },
+    {
+        "code": "3304.99",
+        "name_cn": "玻尿酸护肤精华液、防晒霜、穿戴甲与彩妆礼盒",
+        "name_en": "Facial Serums, Skincare Creams, Cosmetics & Press-on Nails",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "25.0%",
+        "us_total": "25.0%",
+        "us_val_rate": 0.25,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "化妆品出口美国必须完成 MoCRA（化妆品现代化监管法案）工厂注册与成分备案；欧盟需 CPNP 通报。"
+    },
+    {
+        "code": "9503.00",
+        "name_cn": "潮玩盲盒手办、遥控模型车、益智积木与毛绒玩具",
+        "name_en": "Collectible Blind Box Figures, RC Cars, Building Blocks & Plush Toys",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "0.0%",
+        "eu_val_rate": 0.0,
+        "uk_rate": "0.0%",
+        "uk_val_rate": 0.0,
+        "tips": "玩具类目欧美基准税率极低，12岁以下儿童玩具进美国强制要求 CPC 儿童产品安全证书与 ASTM F963 测试。"
+    },
+    {
+        "code": "9506.91",
+        "name_cn": "家用折叠跑步机、划船机、包胶哑铃与普拉提核心床",
+        "name_en": "Folding Treadmills, Rowing Machines, Dumbbells & Pilates Reformers",
+        "category": "医疗与个护",
+        "us_base": "4.6%",
+        "us_sec301": "7.5%",
+        "us_total": "12.1%",
+        "us_val_rate": 0.121,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "普拉提核心床与家用慢走机近年在欧美 TikTok 爆火，属于大件高客单蓝海品类。"
+    },
+    {
+        "code": "9506.29",
+        "name_cn": "充气式桨板 (SUP冲浪板)、皮划艇与水上运动器材",
+        "name_en": "Inflatable Stand-Up Paddleboards (SUP), Kayaks & Water Sports Gear",
+        "category": "医疗与个护",
+        "us_base": "Free (0.0%)",
+        "us_sec301": "7.5%",
+        "us_total": "7.5%",
+        "us_val_rate": 0.075,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "威海拉丝气垫充气桨板占全球 80% 产能，美国基准关税 0%，301 仅 7.5%，亚马逊夏季超级大爆款！"
+    },
+    {
+        "code": "9004.10",
+        "name_cn": "偏光太阳镜、时尚墨镜、防蓝光光学眼镜架与骑行风镜",
+        "name_en": "Polarized Sunglasses, Cycling Eyewear & Optical Frames",
+        "category": "医疗与个护",
+        "us_base": "2.0%",
+        "us_sec301": "7.5%",
+        "us_total": "9.5%",
+        "us_val_rate": 0.095,
+        "eu_rate": "2.9%",
+        "eu_val_rate": 0.029,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "太阳镜进口美国属于 FDA 一类医疗器械监管，清关必须提供 FDA 落球抗冲击测试报告 (Drop Ball Test)！"
+    },
+    {
+        "code": "9507.10",
+        "name_cn": "碳纤维路亚钓鱼竿、纺车轮渔轮与仿生鱼饵",
+        "name_en": "Carbon Fiber Fishing Rods, Spinning Reels & Fishing Lures",
+        "category": "医疗与个护",
+        "us_base": "6.0%",
+        "us_sec301": "7.5%",
+        "us_total": "13.5%",
+        "us_val_rate": 0.135,
+        "eu_rate": "3.7%",
+        "eu_val_rate": 0.037,
+        "uk_rate": "3.0%",
+        "uk_val_rate": 0.03,
+        "tips": "注意美国对钓鱼用具除了进口关税外，还额外征收联邦消费税 (Federal Excise Tax)。"
+    },
+    {
+        "code": "4201.00",
+        "name_cn": "宠物防爆冲牵引绳、猫抓板猫爬架与智能猫砂盆",
+        "name_en": "Pet Leashes, Harnesses, Cat Trees & Smart Litter Boxes",
+        "category": "医疗与个护",
+        "us_base": "2.4%",
+        "us_sec301": "7.5%",
+        "us_total": "9.9%",
+        "us_val_rate": 0.099,
+        "eu_rate": "2.7%",
+        "eu_val_rate": 0.027,
+        "uk_rate": "2.0%",
+        "uk_val_rate": 0.02,
+        "tips": "电动智能猫砂盆按家电机器归类(8479.89/8509.80)，普通宠物胸背牵引带归入 4201.00。"
+    }
+];
 
     let currentCategory = 'ALL';
+    let currentRateFilter = 'ALL';
     let currentSearch = '';
+    let currentLang = 'CN';
     let selectedItem = HS_DATABASE[0];
 
     const searchInput = document.getElementById('search-input');
@@ -508,6 +1816,7 @@
     const matchCount = document.getElementById('match-count');
     const emptyState = document.getElementById('empty-state');
     const categoryPills = document.querySelectorAll('.cat-pill');
+    const ratePills = document.querySelectorAll('.rate-pill');
 
     const calcModal = document.getElementById('calculator-modal');
     const wechatModal = document.getElementById('wechat-modal');
@@ -562,8 +1871,20 @@
           item.code.toLowerCase().includes(query) ||
           item.name_cn.toLowerCase().includes(query) ||
           item.name_en.toLowerCase().includes(query) ||
-          item.category.toLowerCase().includes(query);
-        return matchesCat && matchesQuery;
+          item.category.toLowerCase().includes(query) ||
+          item.us_total.toLowerCase().includes(query) ||
+          item.tips.toLowerCase().includes(query);
+
+        let matchesRate = true;
+        if (currentRateFilter === 'EU_FREE') {
+          matchesRate = (item.eu_val_rate === 0);
+        } else if (currentRateFilter === 'US_LOW') {
+          matchesRate = (item.us_val_rate <= 0.15);
+        } else if (currentRateFilter === 'US_HIGH') {
+          matchesRate = (item.us_val_rate >= 0.30);
+        }
+
+        return matchesCat && matchesQuery && matchesRate;
       });
 
       matchCount.textContent = filtered.length;
@@ -576,10 +1897,16 @@
 
       emptyState.classList.add('hidden');
       
-      resultsContainer.innerHTML = filtered.map((item) => `
+      resultsContainer.innerHTML = filtered.map((item) => {
+        const isUsFreeOrLow = item.us_val_rate <= 0.10;
+        const usBadgeClass = isUsFreeOrLow ? 'text-emerald-600' : (item.us_val_rate >= 0.30 ? 'text-rose-600' : 'text-amber-600');
+        const primaryTitle = currentLang === 'EN' ? item.name_en : item.name_cn;
+        const secondaryTitle = currentLang === 'EN' ? item.name_cn : item.name_en;
+
+        return `
         <div class="bg-white rounded-xl border border-slate-200 hover:border-blue-400 p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
           <div class="space-y-2.5">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-1">
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200">
                 HS ${item.code}
               </span>
@@ -589,34 +1916,34 @@
             </div>
 
             <div>
-              <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
-                ${item.name_cn}
+              <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1" title="${primaryTitle}">
+                ${primaryTitle}
               </h3>
-              <p class="text-xs text-slate-500 font-sans line-clamp-1 mt-0.5" title="${item.name_en}">
-                ${item.name_en}
+              <p class="text-xs text-slate-500 font-sans line-clamp-1 mt-0.5" title="${secondaryTitle}">
+                ${secondaryTitle}
               </p>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-100 space-y-1.5 text-xs">
               <div class="flex justify-between items-center">
-                <span class="text-slate-500">美国进口综合税率:</span>
-                <span class="font-bold text-rose-600 font-mono">${item.us_total}</span>
+                <span class="text-slate-500">🇺🇸 美国综合关税:</span>
+                <span class="font-bold ${usBadgeClass} font-mono">${item.us_total}</span>
               </div>
               <div class="flex justify-between items-center text-[11px] text-slate-400">
-                <span>(基准税率: ${item.us_base} | 301条款附税)</span>
+                <span>基准: ${item.us_base} | 301附税: ${item.us_sec301}</span>
               </div>
               <div class="flex justify-between items-center pt-1 border-t border-slate-200">
-                <span class="text-slate-500">欧盟基准关税:</span>
+                <span class="text-slate-500">🇪🇺 欧盟基准关税:</span>
                 <span class="font-semibold text-blue-600 font-mono">${item.eu_rate}</span>
               </div>
               <div class="flex justify-between items-center">
-                <span class="text-slate-500">英国基准关税:</span>
+                <span class="text-slate-500">🇬🇧 英国基准关税:</span>
                 <span class="font-semibold text-slate-700 font-mono">${item.uk_rate}</span>
               </div>
             </div>
 
-            <p class="text-[11px] text-slate-500 leading-relaxed line-clamp-2">
-              <strong class="text-slate-600">合规提示:</strong> ${item.tips}
+            <p class="text-[11px] text-slate-500 leading-relaxed line-clamp-2" title="${item.tips}">
+              <strong class="text-slate-700">清关要点:</strong> ${item.tips}
             </p>
           </div>
 
@@ -630,7 +1957,7 @@
             </button>
           </div>
         </div>
-      `).join('');
+      `}).join('');
 
       document.querySelectorAll('.btn-open-calc').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -644,8 +1971,8 @@
           const code = e.currentTarget.getAttribute('data-code');
           const found = HS_DATABASE.find(x => x.code === code);
           if (found) {
-            const copyContent = `HS Code: ${found.code}\n品名(中文): ${found.name_cn}\nDescription(EN): ${found.name_en}\n美国综合关税: ${found.us_total} | 欧盟关税: ${found.eu_rate}`;
-            copyText(copyContent, `已复制 HS ${found.code} 报关信息`);
+            const copyContent = `HS Code: ${found.code}\n品名(CN): ${found.name_cn}\nDescription(EN): ${found.name_en}\n美国综合关税: ${found.us_total} (基准:${found.us_base} + 301:${found.us_sec301})\n欧盟关税: ${found.eu_rate} | 英国关税: ${found.uk_rate}\n合规要点: ${found.tips}`;
+            copyText(copyContent, `已复制 HS ${found.code} 完整参数`);
           }
         });
       });
@@ -656,10 +1983,12 @@
       if (!item) return;
       selectedItem = item;
 
-      document.getElementById('modal-hs').textContent = item.code;
+      document.getElementById('modal-hs').textContent = `HS ${item.code}`;
       document.getElementById('modal-title').textContent = item.name_cn;
+      document.getElementById('modal-en-title').textContent = item.name_en;
       document.getElementById('modal-us-rate').textContent = item.us_total;
       document.getElementById('modal-us-base').textContent = item.us_base;
+      document.getElementById('modal-us-301').textContent = item.us_sec301;
       document.getElementById('modal-eu-rate').textContent = item.eu_rate;
       document.getElementById('modal-uk-rate').textContent = item.uk_rate;
       document.getElementById('modal-tips').textContent = `出运合规提醒：${item.tips}`;
@@ -681,6 +2010,24 @@
       document.getElementById('modal-uk-val').textContent = `$${ukVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
 
+    function handleUrlParams() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const hsParam = params.get('hs');
+        if (hsParam) {
+          searchInput.value = hsParam;
+          currentSearch = hsParam;
+          clearSearchBtn.classList.remove('hidden');
+          renderItems();
+          const matched = HS_DATABASE.find(x => x.code.toLowerCase() === hsParam.toLowerCase());
+          if (matched) {
+            document.title = `HS Code ${matched.code} Tariff & Import Duty (${matched.name_cn}) | GlobalTrade`;
+            openCalculator(matched.code);
+          }
+        }
+      } catch (e) {}
+    }
+
     function setupEvents() {
       searchInput.addEventListener('input', (e) => {
         currentSearch = e.target.value;
@@ -700,6 +2047,16 @@
         searchInput.focus();
       });
 
+      document.querySelectorAll('.hot-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+          const q = tag.getAttribute('data-query');
+          searchInput.value = q;
+          currentSearch = q;
+          clearSearchBtn.classList.remove('hidden');
+          renderItems();
+        });
+      });
+
       categoryPills.forEach(pill => {
         pill.addEventListener('click', () => {
           categoryPills.forEach(p => {
@@ -714,6 +2071,39 @@
         });
       });
 
+      ratePills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          ratePills.forEach(p => {
+            p.classList.remove('bg-slate-800', 'text-white');
+          });
+          pill.classList.add('bg-slate-800', 'text-white');
+          currentRateFilter = pill.getAttribute('data-rate');
+          renderItems();
+        });
+      });
+
+      document.getElementById('btn-lang-toggle').addEventListener('click', () => {
+        currentLang = currentLang === 'CN' ? 'EN' : 'CN';
+        document.getElementById('hero-title').textContent = currentLang === 'EN' 
+          ? 'Global HS Code & US/EU/UK Import Tariff Calculator' 
+          : '全球 HS 编码与多国进口关税反查';
+        renderItems();
+        showToast(currentLang === 'EN' ? 'Switched to English Primary View' : '已切换为中文主视图');
+      });
+
+      document.querySelectorAll('.seo-quick-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const code = link.getAttribute('data-hscode');
+          searchInput.value = code;
+          currentSearch = code;
+          clearSearchBtn.classList.remove('hidden');
+          renderItems();
+          openCalculator(code);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
       document.getElementById('calc-invoice-val').addEventListener('input', recalcDuty);
 
       document.getElementById('close-modal-btn').addEventListener('click', () => {
@@ -721,10 +2111,15 @@
         calcModal.classList.remove('opacity-100');
       });
 
+      document.getElementById('btn-share-link').addEventListener('click', () => {
+        const shareUrl = `https://tianjun588.github.io/trade-hs-finder/?hs=${selectedItem.code}`;
+        copyText(shareUrl, `已复制 HS ${selectedItem.code} 专属直达链接`);
+      });
+
       document.getElementById('btn-copy-declaration').addEventListener('click', () => {
         const invoiceVal = parseFloat(document.getElementById('calc-invoice-val').value) || 0;
         const usVal = invoiceVal * selectedItem.us_val_rate;
-        const text = `【出口报关与清关税费预估单】\n海关编码(HS Code): ${selectedItem.code}\n商品名称: ${selectedItem.name_cn}\nEnglish Name: ${selectedItem.name_en}\n申报货值: $${invoiceVal.toLocaleString()} USD\n目的港关税核算:\n - 美国预计税金: $${usVal.toLocaleString()} (${selectedItem.us_total})\n - 欧盟预计税金: $${(invoiceVal * selectedItem.eu_val_rate).toLocaleString()} (${selectedItem.eu_rate})\n监管提示: ${selectedItem.tips}\n(本数据由 GlobalTrade HS Navigator 自动生成)`;
+        const text = `【出口报关与清关税费预估单】\n海关编码(HS Code): ${selectedItem.code}\n商品名称: ${selectedItem.name_cn}\nEnglish Name: ${selectedItem.name_en}\n申报货值: $${invoiceVal.toLocaleString()} USD\n目的港关税核算:\n - 美国预计税金: $${usVal.toLocaleString()} (${selectedItem.us_total})\n - 欧盟预计税金: $${(invoiceVal * selectedItem.eu_val_rate).toLocaleString()} (${selectedItem.eu_rate})\n - 英国预计税金: $${(invoiceVal * selectedItem.uk_val_rate).toLocaleString()} (${selectedItem.uk_rate})\n监管提示: ${selectedItem.tips}\n查询直达: https://tianjun588.github.io/trade-hs-finder/?hs=${selectedItem.code}`;
         copyText(text, '已复制完整关税预估申报单！');
       });
 
@@ -768,6 +2163,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       renderItems();
       setupEvents();
+      handleUrlParams();
     });
   </script>
 </body>
